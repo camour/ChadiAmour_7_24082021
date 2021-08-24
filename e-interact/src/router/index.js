@@ -9,18 +9,18 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'SignIn',
+    path: '/signIn',
+    name: 'SignIn',    
     component: SignIn
   },
   {
-    path: '/signUp',
+    path: '/signUp',  
     name: 'SignUp',
     component: SignUp
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: '/',
+    name: 'Home',   
     component: Home
   },
   {
@@ -33,10 +33,20 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
+let router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if( (to.name != 'SignIn') && (!JSON.parse(localStorage.getItem('token')))){
+    next({name: 'SignIn'});
+  }else if((to.name == 'SignIn') && (JSON.parse(localStorage.getItem('token')))){
+    next({name: 'Home'});
+  }else{
+    next();
+  }
 })
 
 export default router

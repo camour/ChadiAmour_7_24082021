@@ -3,11 +3,10 @@
         <div class="header">
             <div class="header__logo"></div>
             <div class="nav">
-                <router-link v-show="!this.$store.state.authentification" to="/">Sign In</router-link>
+                <router-link v-show="!this.$store.state.authentification" to="/signIn">Sign In</router-link>
                 <router-link v-show="!this.$store.state.authentification" to="/signUp">Sign Up</router-link>
-                <router-link v-show="this.$store.state.authentification" to="/home">Home</router-link>
-                <router-link v-show="this.$store.state.authentification" to="/account">Account</router-link>
-                <router-link v-show="this.$store.state.authentification" to="/account">Log out</router-link>
+                <router-link v-show="this.$store.state.authentification" to="/">Home</router-link>
+                <router-link v-show="this.$store.state.authentification" to="/account">Account</router-link>                
             </div>
         </div>
     </div>
@@ -16,7 +15,7 @@
 
 <script>
     export default{
-        name: 'Header'        
+        name: 'Header',       
     }
 </script>
 

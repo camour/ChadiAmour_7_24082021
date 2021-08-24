@@ -10,6 +10,6 @@
         name: 'SignIn', 
         components: {
             Form
-        }  
+        }
     };
 </script>

@@ -15,13 +15,6 @@
     components: {
       Header
     },
-    beforeMount(){
-      console.log(this.$router.history);
-      if(JSON.parse(localStorage.getItem('token'))){
-        this.$store.dispatch('setAuthentification', true);
-        this.$router.replace('/home');
-      }
-    }
   }
 </script>
 

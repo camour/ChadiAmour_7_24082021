@@ -15,7 +15,7 @@
                 <input type ="password" name="password" id="password" v-model="password"/>
             </div>
             <div>
-                <button id="submitButton" @click="connect">submit</button>
+                <button type="submit" id="submitButton" @click="connect">submit</button>
             </div>           
     </div>
 </template>
@@ -49,7 +49,7 @@
             connect(){     
                 this.$store.dispatch('setAuthentification',true);
                 localStorage.setItem('token', '123');
-                this.$router.push('/home');                
+                this.$router.push('/');
                 fetch('http://localhost:3000/api/auth', {
                     method: 'POST',
                     headers: {
@@ -69,7 +69,7 @@
                     if(apiResponse.token){
                         this.$store.dispatch('setAuthentification',true);
                         localStorage.setItem('token', '123');
-                        this.$router.push('/home'); 
+                        
                     }
                 })
                 .catch();
