@@ -1,5 +1,5 @@
 <template>
-    <div id="articles">
+    <div class="articles">
 
         <Article v-for="(article, index) in this.$store.state.articlesArray" 
         :article="article"
@@ -20,5 +20,8 @@
 </script>
 
 <style lang="scss">
-
+    .articles{
+        width: 70%;
+        margin: auto;
+    }
 </style>
