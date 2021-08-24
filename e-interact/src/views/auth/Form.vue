@@ -48,7 +48,8 @@
         methods: {
             connect(){     
                 this.$store.dispatch('setAuthentification',true);
-                this.$router.push("/home");                  
+                localStorage.setItem('token', '123');
+                this.$router.push('/home');                
                 fetch('http://localhost:3000/api/auth', {
                     method: 'POST',
                     headers: {
@@ -61,12 +62,14 @@
                 })
                 .then(result => {
                     if(result.ok){
-                        return result.json();
+                        return result.json();                          
                     }
                 })
                 .then(apiResponse => {
                     if(apiResponse.token){
                         this.$store.dispatch('setAuthentification',true);
+                        localStorage.setItem('token', '123');
+                        this.$router.push('/home'); 
                     }
                 })
                 .catch();

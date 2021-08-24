@@ -7,6 +7,7 @@
                 <router-link v-show="!this.$store.state.authentification" to="/signUp">Sign Up</router-link>
                 <router-link v-show="this.$store.state.authentification" to="/home">Home</router-link>
                 <router-link v-show="this.$store.state.authentification" to="/account">Account</router-link>
+                <router-link v-show="this.$store.state.authentification" to="/account">Log out</router-link>
             </div>
         </div>
     </div>

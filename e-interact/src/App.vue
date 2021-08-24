@@ -2,7 +2,8 @@
   <div id="app">   
    
     <Header />
-    <router-view/>
+    <router-view />
+    
     
   </div>
 </template>
@@ -13,20 +14,29 @@
     name: 'App',
     components: {
       Header
+    },
+    beforeMount(){
+      console.log(this.$router.history);
+      if(JSON.parse(localStorage.getItem('token'))){
+        this.$store.dispatch('setAuthentification', true);
+        this.$router.replace('/home');
+      }
     }
   }
 </script>
 
 <style lang="scss">
+  @font-face{
+    font-family: 'Bertha';
+    src: url('../public/polices/BerthaMelanie.ttf') format('truetype');
+  }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  
+  font-family: 'Bertha', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
 </style>
