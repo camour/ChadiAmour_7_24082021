@@ -1,7 +1,11 @@
 <template>
     <div>
         <div class="header">
-            <div class="header__logo"></div>
+                        
+            <router-link to="/" class="header__brand">
+                <div class="header__company">Groupomania</div>
+                <div class="header__logo"></div> 
+            </router-link>
             <div class="nav">
                 <router-link v-show="!this.$store.state.authentification" to="/signIn">Sign In</router-link>
                 <router-link v-show="!this.$store.state.authentification" to="/signUp">Sign Up</router-link>
@@ -21,22 +25,33 @@
 
 <style lang="scss">
     .header{
-        width: 380px;
+        width: 420px;
         margin: auto;
         margin-top: 20px;
         margin-bottom: 40px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        
+        &__brand{
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+        }
 
         &__logo{
+ 
             width: 120px;
             height: 120px;
+            margin-right: 45px;
             background-image: url('../../images/icon.png');
             background-position: center;
             background-size: cover;
         }
-    }
 
+    }
+    
     .nav{
         width: 50%;
         display: flex;
