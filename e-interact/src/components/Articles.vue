@@ -23,5 +23,6 @@
     .articles{
         width: 70%;
         margin: auto;
+        position: relative;  
     }
 </style>

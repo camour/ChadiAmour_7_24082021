@@ -33,22 +33,31 @@
 
 <style lang="scss">
     .articleBlock{
-        margin-bottom: 50px;   
+        margin-bottom: 50px;
+        position: relative;
+        border: 2px rgb(229, 201, 201) solid; 
+        box-shadow: 2px 2px 3px rgb(243, 122, 122);
+        border-radius: 1rem;
+        padding-bottom: 1px;
+
+        &:hover{
+            border: 2px rgb(229, 201, 201) solid;            
+            box-shadow: 4px 4px 5px rgb(243, 122, 122);
+            transform: scale(1.01);
+        }
     }
     .article{
         margin-bottom: 20px;
         display: flex;
-        padding: 0px;
-        box-shadow: 1px 1px 3px rgb(243, 122, 122);
-        border-radius: 1rem;
-        &:hover{
-            border: 1px rgb(229, 201, 201) solid;            
-            box-shadow: 4px 4px 5px rgb(243, 122, 122);
-            z-index: 1000;
-        }
+        padding: 0px;  
 
         &__post{          
             width: 80%;
+
+            .articleContent{
+                text-align: left;
+                padding-left: 10px;
+            }
         }
         &__user{
             margin: 5px;
@@ -56,9 +65,6 @@
             border-radius: 1rem 0 0 1rem;
             box-shadow: 2px 2px 3px rgb(207, 106, 106);
             background: rgb(243, 239, 239);
-        }
-        comment{
-            align-self: flex-end;
         }
     }
 </style>
