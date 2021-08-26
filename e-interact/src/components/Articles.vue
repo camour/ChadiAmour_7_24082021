@@ -21,7 +21,7 @@
 
 <style lang="scss">
     .articles{
-        width: 70%;
+        width: 600px;
         margin: auto;
         position: relative;  
     }

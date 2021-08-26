@@ -1,13 +1,15 @@
 <template>
     <div class="commentBlock">
-        <div class="commentUserBlock"><div class="commentUser">{{ comment.userName }}</div></div>
+        <div class="commentUserBlock">
+            <div class="commentUser">{{ comment.userName }}</div>
+        </div>
         <div class="comment">          
-            <div class="commentContent">{{ comment.commentContent }}</div>
-            <div class="commentButtons">
-                <button class=" button toolsButton">tools</button>
-                <div class="buttonsBlock">                    
-                    <button class="button">modify</button>
-                    <button class="button">delete</button>
+            <div v-show="this.$store.state.user.userName!=comment.userName" class="commentContent">{{ comment.commentContent }}</div>
+            <textarea v-show="this.$store.state.user.userName==comment.userName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
+            <div v-show="this.$store.state.user.userName==comment.userName" class="commentButtons">                
+                <div class="buttonsBlock" :id="'buttonsBlock' + comment.commentId">                    
+                    <button class="button" :id="'saveButton' + comment.commentId" @click="saveComment">save</button>
+                    <button class="button" :id="'deleteButton' + comment.commentId" @click="deleteComment">delete</button>
                 </div>
             </div>
         </div>
@@ -21,6 +23,9 @@
             comment: {
                 type: Object
             }
+        },
+        methods: {
+            
         }
     }
 </script>
@@ -42,12 +47,7 @@
         border-radius: 0 0 1rem 1rem;
         
     }
-    
-    .commentTitle{
-        width: 100%;
-        text-align: center;
-              
-    }
+
     .comment{
         position: relative; 
         display: flex;
@@ -57,57 +57,66 @@
         padding: 10px;
         text-align: center;
         border-left: 2px rgb(221, 144, 144) solid;
-        overflow: hidden;
-        
+        overflow: hidden;        
     }
     .commentButtons{
         position: relative;
-        width: 20%;
+        width: 25%;
         height: 35px;        
         
-        .buttonsBlock{
-            opacity: 0;
+        .buttonsBlock{           
             position: absolute;
-            top: 0;
-            //right: -120%;
-            transform: translateX(110%);
             display: flex;
+            top: 0;
+            right: 0;
+            transform: translateX(130%);
             justify-content: center;
-            transition: all 1.5s;
+            transition: all 1s;
         }
-        .toolsButton{
-            transition: all 0.3s;
-            &:focus{
-                opacity: 0;
-                & + .buttonsBlock{
-                    opacity: 1;
-                    transform: translateX(-10%);
-                }
-            }
-        }
-        .button{            
-            border: 2px rgb(137, 103, 204) solid;
-            border-radius: 1rem;
-            background-color: rgb(236, 187, 187);
-            padding: 5px;
-            margin-left: 6px;
-
-            &:hover{
-                cursor: pointer;
-            }
-        }
+        
+        
     }
+
+    .button{            
+        border: 1px rgb(223, 144, 196) solid;
+        border-radius: 1rem;
+        background-color: #ecbbbb;
+        box-shadow: 1px 1px 3px rgb(223, 144, 196);
+        font-weight: bolder;
+        padding: 5px;
+        margin-left: 6px;
+        cursor: pointer;
+
+    }
+
     .commentUserBlock{
         width: 20%;
     }
+
     .commentUser{
         width: 90%;
         margin: auto;
         border: 1px rgb(234, 228, 245) solid;
     }
+
     .commentContent{
-        width: 80%;
+        width:70%;
+        font-family: 'KG';
+        border: 1px #bdb2b2 solid;
+        border-radius: 1em;
+        background-color: #f3efef;
         text-align: left;
         padding-left: 10px;
+        
+        &.commentContentUser:hover{
+            box-shadow: 2px 2px 2px #313030;
+            cursor: pointer;
+        }
+        &.commentContentUser:focus{            
+            & + .commentButtons > .buttonsBlock{
+                transform: translateX(-1%);
+            }
+        }
     }
+
 </style>
