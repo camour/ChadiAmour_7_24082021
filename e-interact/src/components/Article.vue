@@ -47,7 +47,7 @@
         }
     }
     .article{
-        margin-bottom: 20px;
+        margin-bottom: 50px;
         display: flex;
         padding: 0px;  
 
@@ -55,7 +55,7 @@
             width: 80%;
 
             .articleContent{
-                text-align: left;
+                text-align: center;
                 padding-left: 10px;
             }
         }
@@ -67,4 +67,5 @@
             background: rgb(243, 239, 239);
         }
     }
+
 </style>
