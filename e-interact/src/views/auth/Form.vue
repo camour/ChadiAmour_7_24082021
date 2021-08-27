@@ -48,9 +48,10 @@
         methods: {
             connect(){     
                 this.$store.dispatch('setAuthentification',true);
-                localStorage.setItem('token', '123');
-                this.$router.push('/');
-                fetch('http://localhost:3000/api/auth', {
+                //localStorage.setItem('token', '123');
+                //this.$router.push('/');
+                const endPoint = this.signUp ? 'signIn' : 'signUp';
+                fetch('http://localhost:3000/api/auth/' + endPoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
