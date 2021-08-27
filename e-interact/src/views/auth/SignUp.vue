@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Form :signUp="true"/>  
+        <Form :signUp="true" />  
     </div>
 </template> 
 

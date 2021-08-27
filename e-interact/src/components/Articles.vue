@@ -1,7 +1,7 @@
 <template>
     <div class="articles">
 
-        <Article v-for="(article, index) in this.$store.state.articlesArray" 
+        <Article v-for="(article, index) in articlesArray" 
         :article="article"
         :key="index"/>        
 
@@ -10,11 +10,15 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import Article from './Article.vue';
     export default{
         name: 'Articles',
         components: {
             Article            
+        },
+        computed: {
+            ...mapState(['articlesArray'])
         }
     }
 </script>

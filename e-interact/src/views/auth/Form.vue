@@ -2,7 +2,7 @@
     <div class="form">
             <div v-show="signUp">
                 <label for="email">email</label>
-                <input type="email" name="email" id="email" v-model="password"/>
+                <input type="email" name="email" id="email" v-model="email"/>
             </div>
 
             <div>
@@ -25,8 +25,7 @@
         name: 'Form',
         props: {
             signUp: {
-                type: Boolean,
-                default: false
+                type: Boolean
             }
         },
         data(){
@@ -50,7 +49,8 @@
                 this.$store.dispatch('setAuthentification',true);
                 //localStorage.setItem('token', '123');
                 //this.$router.push('/');
-                const endPoint = this.signUp ? 'signIn' : 'signUp';
+                const endPoint = this.signUp ? 'signUp' : 'signIn';
+                console.log(endPoint);
                 fetch('http://localhost:3000/api/auth/' + endPoint, {
                     method: 'POST',
                     headers: {
@@ -62,16 +62,16 @@
                     })
                 })
                 .then(result => {
-                    if(result.ok){
+                    if(result.ok){                        
                         return result.json();                          
                     }
                 })
-                .then(apiResponse => {
-                    if(apiResponse.token){
+                .then( () => {
+                    //if(apiResponse.token){
                         this.$store.dispatch('setAuthentification',true);
                         localStorage.setItem('token', '123');
-                        
-                    }
+                        this.$router.push('/');                        
+                    //}
                 })
                 .catch();
             }           

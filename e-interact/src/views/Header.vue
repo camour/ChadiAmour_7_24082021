@@ -7,10 +7,10 @@
                 <div class="header__logo"></div> 
             </router-link>
             <div class="nav">
-                <router-link v-show="!this.$store.state.authentification" to="/signIn">Sign In</router-link>
-                <router-link v-show="!this.$store.state.authentification" to="/signUp">Sign Up</router-link>
-                <router-link v-show="this.$store.state.authentification" to="/">Home</router-link>
-                <router-link v-show="this.$store.state.authentification" to="/account">Account</router-link>                
+                <router-link v-show="!authentification" to="/signIn">Sign In</router-link>
+                <router-link v-show="!authentification" to="/signUp">Sign Up</router-link>
+                <router-link v-show="authentification" to="/">Home</router-link>
+                <router-link v-show="authentification" to="/account">Account</router-link>                
             </div>
         </div>
     </div>
@@ -18,8 +18,12 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default{
-        name: 'Header',       
+        name: 'Header',
+        computed: {
+            ...mapState(['authentification'])
+        }     
     }
 </script>
 

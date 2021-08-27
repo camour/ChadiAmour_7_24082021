@@ -25,7 +25,12 @@
             }
         },
         methods: {
-            
+            saveComment(){
+
+            },
+            deleteComment(){
+                
+            }
         }
     }
 </script>

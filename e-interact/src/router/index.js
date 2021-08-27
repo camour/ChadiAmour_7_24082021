@@ -41,7 +41,7 @@ let router = new VueRouter({
 
 // when not authentificated, users can not access other routes
 router.beforeEach((to, from, next) => {
-  if( (to.name != 'SignIn') && (!JSON.parse(localStorage.getItem('token')))){
+  if( ((to.name != 'SignIn') && (to.name != 'SignUp')) && (!JSON.parse(localStorage.getItem('token')))){
     next({name: 'SignIn'});
   }else if((to.name == 'SignIn') && (JSON.parse(localStorage.getItem('token')))){
     next({name: 'Home'});
