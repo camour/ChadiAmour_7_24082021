@@ -37,9 +37,9 @@
             }
             else if(this.signUp){
                 return{
-                    email: '',
-                    userName: '',
-                    password: ''                
+                    email: 'test@gmail.com',
+                    userName: 'test',
+                    password: 'test'                
                 };
             }
             

@@ -4,6 +4,7 @@ import SignIn from '../views/auth/SignIn.vue';
 import SignUp from '../views/auth/SignUp.vue';
 import Home from '../views/website/Home.vue';
 import Account from '../views/website/Account.vue';
+import LogOut from '../views/auth/LogOut.vue';
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Account
+  },
+  {
+    path: '/logOut',
+    name: 'LogOut',
+    component: LogOut
   }
 ]
 
@@ -43,11 +49,11 @@ let router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if( ((to.name != 'SignIn') && (to.name != 'SignUp')) && (!JSON.parse(localStorage.getItem('token')))){
     next({name: 'SignIn'});
-  }else if((to.name == 'SignIn') && (JSON.parse(localStorage.getItem('token')))){
+  }else if(((to.name == 'SignIn') || (to.name=='SignUp')) && (JSON.parse(localStorage.getItem('token')))){
     next({name: 'Home'});
   }else{
     next();
   }
 })
 
-export default router
+export default router;
