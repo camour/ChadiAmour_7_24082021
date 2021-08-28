@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-            <div v-show="signUp">
+            <div v-if="signUp">
                 <label for="email">email</label>
                 <input type="email" name="email" id="email" v-model="email"/>
             </div>
