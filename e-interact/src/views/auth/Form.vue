@@ -31,8 +31,8 @@
         data(){
             if(!this.signUp){
                 return{
-                    userName: '',
-                    password: ''                
+                    userName: 'test',
+                    password: 'test'                
                 };
             }
             else if(this.signUp){
@@ -50,7 +50,6 @@
                 //localStorage.setItem('token', '123');
                 //this.$router.push('/');
                 const endPoint = this.signUp ? 'signUp' : 'signIn';
-                console.log(endPoint);
                 fetch('http://localhost:3000/api/auth/' + endPoint, {
                     method: 'POST',
                     headers: {

@@ -30,7 +30,7 @@
 
 <style lang="scss">
     .header{
-        width: 420px;
+        width: 600px;
         margin: auto;
         margin-top: 20px;
         margin-bottom: 40px;
@@ -39,6 +39,7 @@
         align-items: center;
         
         &__brand{
+            width: 40%;
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -58,7 +59,7 @@
     }
     
     .nav{
-        width: 50%;
+        width: 60%;
         display: flex;
         justify-content: space-around;
         align-items: center;
