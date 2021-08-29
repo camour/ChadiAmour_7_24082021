@@ -6,7 +6,7 @@
                 <p class="userName">{{ article.userName }}</p>
             </div>
             <div class="article__post">
-                <h3 class="articleTitle">{{ article.articleTitle }}</h3>
+                <h3 class="articleSubject">{{ article.articleSubject }}</h3>
                 <p class="articleContent">{{ article.articleContent }}</p>                     
             </div>            
         </div>

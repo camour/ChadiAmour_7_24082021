@@ -46,9 +46,6 @@
         },
         methods: {
             connect(){     
-                this.$store.dispatch('setAuthentification',true);
-                //localStorage.setItem('token', '123');
-                //this.$router.push('/');
                 const endPoint = this.signUp ? 'signUp' : 'signIn';
                 fetch('http://localhost:3000/api/auth/' + endPoint, {
                     method: 'POST',

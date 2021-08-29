@@ -14,37 +14,37 @@ export default new Vuex.Store({
         firstName: '',
         job: ''
       },
-      articlesArray: [{userName: 'Mike02',
+      articlesArray: [{articleUserName: 'Mike02',
                       articleId: 12345,
-                      articleTitle: 'Vue JS',
+                      articleSubject: 'Vue JS',
                       articleContent: 'Le framework Vue JS offre la possibilite d\'implementer un router',
                       comments: [{
-                        userName: 'Cath_90',
+                        commentUserName: 'Cath_90',
                         commentId: 3445,
                         commentContent: 'Oui et tu as même la possibilité d\'ajouter un data store centralisé'
                         }]
                       },
-                      {userName: 'James_Br',
+                      {articleUserName: 'James_Br',
                       articleId: 12346,
-                      articleTitle: 'RH mouvements',
+                      articleSubject: 'RH mouvements',
                       articleContent: 'Remaniement du département RH avec notamment l\'arrivée d\'une manager compétente',
                       comments: [{
-                        userName: 'MilerM',
+                        commentUserName: 'MilerM',
                         commentId: 3454,
                         commentContent: 'On vous souhaite plein de courage pour cette nouvelle équipe',
                       },
                       {
-                        userName: 'Diana6',
+                        commentUserName: 'Diana6',
                         commentId: 5634,
                         commentContent: 'Oui je rejoins Miler sur ce point et n\'hésitez pas en cas de question'
                       }],
                       },
-                      { userName: 'Nic_BOp',
+                      { articleUserName: 'Nic_BOp',
                         articleId: 12347,
-                        articleTitle: 'JO 2021',
+                        articleSubject: 'JO 2021',
                         articleContent: 'Quelle performance du Toulousain pour la filière Aviron',
                         comments: [{
-                            userName: 'Santos2',
+                            commentUserName: 'Santos2',
                             commentContent: 'Oui ce sport n\'est pas très médiatisé et pourtant il mérite de l\'être tout autant que d\'autres'
                         }],
                       }
