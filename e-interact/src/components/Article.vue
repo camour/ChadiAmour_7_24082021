@@ -26,10 +26,7 @@
             article: {
                 type: Object,
             }
-        },
-        beforeMount(){
-            console.log(this.article);
-        }       
+        }     
     }
 
 </script>

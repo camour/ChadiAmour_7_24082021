@@ -27,7 +27,7 @@
         }
       })
       .then(objectResult => {        
-        this.$store.dispatch('fillArticlesArray', {articlesArray: objectResult.articlesArray});        
+        this.$store.dispatch('fillArticlesArray', objectResult.articlesArray);        
       })
       .catch();
     }

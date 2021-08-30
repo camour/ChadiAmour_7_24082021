@@ -25,7 +25,7 @@ export default new Vuex.Store({
       state.authentification = false;
     },
     FILL_ARTICLES_ARRAY(state, payload){
-      state.articlesArray = payload.articlesArray;
+      state.articlesArray = payload;
     }
   },
   actions: {
@@ -37,8 +37,8 @@ export default new Vuex.Store({
         commit('DISABLE_AUTHENTIFICATION');
       }
     },
-    fillArticlesArray({commit}, payload){
-      if(payload.articlesArray){
+    fillArticlesArray({commit}, payload = []){
+      if(payload){
         commit('FILL_ARTICLES_ARRAY', payload);
       }
     }
