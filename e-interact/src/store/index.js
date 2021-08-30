@@ -8,8 +8,8 @@ export default new Vuex.Store({
     return{
       authentification: (JSON.parse(localStorage.getItem('token'))) ? true : false,
       user:{
-        id: 0,
-        userName: 'Cath_90',
+        userId: 0,
+        userName: 'test',
         lastName: '',
         firstName: '',
         job: ''

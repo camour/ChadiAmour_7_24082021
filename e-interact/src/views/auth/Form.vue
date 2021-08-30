@@ -62,12 +62,14 @@
                         return result.json();                          
                     }
                 })
-                .then( () => {
-                    //if(apiResponse.token){
+                .then( (apiResponse) => {
+                    if(apiResponse.token){
                         this.$store.dispatch('setAuthentification',true);
                         localStorage.setItem('token', '123');
-                        this.$router.push('/');                        
-                    //}
+                        this.$router.push('/');                                              
+                    }else{
+                        this.$router.push('/signIn');
+                    }                     
                 })
                 .catch();
             }           
