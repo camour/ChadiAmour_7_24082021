@@ -1,12 +1,12 @@
 <template>
     <div class="commentBlock">
         <div class="commentUserBlock">
-            <div class="commentUser">{{ comment.userName }}</div>
+            <div class="commentUser">{{ comment.commentUserName }}</div>
         </div>
         <div class="comment">          
-            <div v-show="this.$store.state.user.userName!=comment.userName" class="commentContent">{{ comment.commentContent }}</div>
-            <textarea v-show="this.$store.state.user.userName==comment.userName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
-            <div v-show="this.$store.state.user.userName==comment.userName" class="commentButtons">                
+            <div v-show="this.$store.state.user.userName!=comment.commentUserName" class="commentContent">{{ comment.commentContent }}</div>
+            <textarea v-show="this.$store.state.user.userName==comment.commentUserName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
+            <div v-show="this.$store.state.user.userName==comment.commentUserName" class="commentButtons">                
                 <div class="buttonsBlock" :id="'buttonsBlock' + comment.commentId">                    
                     <button class="button" :id="'saveButton' + comment.commentId" @click="saveComment">save</button>
                     <button class="button" :id="'deleteButton' + comment.commentId" @click="deleteComment">delete</button>

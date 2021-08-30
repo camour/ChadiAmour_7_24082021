@@ -3,14 +3,14 @@
     <div class="articleBlock">
         <div class="article">
             <div class="article__user">
-                <p class="userName">{{ article.userName }}</p>
+                <p class="userName">{{ article.articleUserName }}</p>
             </div>
             <div class="article__post">
                 <h3 class="articleSubject">{{ article.articleSubject }}</h3>
                 <p class="articleContent">{{ article.articleContent }}</p>                     
             </div>            
         </div>
-        <Comment v-for="(comment, index) in article.comments" :key="index" :comment="comment"/> 
+        <Comment v-for="(comment, index) in article.comments" :key="index" :comment="comment"/>
     </div>
     
 </template>
