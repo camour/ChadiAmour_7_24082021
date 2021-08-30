@@ -26,9 +26,8 @@
           return result.json();
         }
       })
-      .then(articlesArray => {
-        console.log(articlesArray);
-        this.$store.dispatch('fillArticlesArray', articlesArray);        
+      .then(objectResult => {        
+        this.$store.dispatch('fillArticlesArray', {articlesArray: objectResult.articlesArray});        
       })
       .catch();
     }

@@ -3,8 +3,7 @@
 
         <Article v-for="(article, index) in articlesArray" 
         :article="article"
-        :key="index"/>        
-
+        :key="index"/>       
     </div>
     
 </template>
@@ -19,7 +18,7 @@
         },
         computed: {
             ...mapState(['articlesArray'])
-        }
+        },
     }
 </script>
 

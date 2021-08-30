@@ -26,7 +26,10 @@
             article: {
                 type: Object,
             }
-        },           
+        },
+        beforeMount(){
+            console.log(this.article);
+        }       
     }
 
 </script>
@@ -66,6 +69,6 @@
             box-shadow: 2px 2px 3px rgb(207, 106, 106);
             background: rgb(243, 239, 239);
         }
-    }
+    } 
 
 </style>
