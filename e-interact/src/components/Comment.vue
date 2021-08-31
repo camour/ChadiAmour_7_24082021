@@ -50,7 +50,6 @@
         border-left: 0px;
         border-bottom: 0px;
         border-radius: 0 0 1rem 1rem;
-        
     }
 
     .comment{
@@ -63,6 +62,15 @@
         text-align: center;
         border-left: 2px rgb(221, 144, 144) solid;
         overflow: hidden;        
+    }
+    .commentUserBlock{
+        width: 20%;
+    }
+
+    .commentUser{
+        width: 90%;
+        margin: auto;
+        border: 1px rgb(234, 228, 245) solid;
     }
     .commentButtons{
         position: relative;
@@ -79,30 +87,16 @@
             transition: all 1s;
         }
         .button{            
-        border: 1px rgb(223, 144, 196) solid;
-        border-radius: 1rem;
-        background-color: #ecbbbb;
-        box-shadow: 1px 1px 3px rgb(223, 144, 196);
-        font-weight: bolder;
-        padding: 5px;
-        margin-left: 6px;
-        cursor: pointer;
-    }
-        
-        
-    }
-    
-
-    .commentUserBlock{
-        width: 20%;
-    }
-
-    .commentUser{
-        width: 90%;
-        margin: auto;
-        border: 1px rgb(234, 228, 245) solid;
-    }
-
+            border: 1px rgb(223, 144, 196) solid;
+            border-radius: 1rem;
+            background-color: #ecbbbb;
+            box-shadow: 1px 1px 3px rgb(223, 144, 196);
+            font-weight: bolder;
+            padding: 5px;
+            margin-left: 6px;
+            cursor: pointer;
+        }        
+    }  
     .commentContent{
         width:70%;
         font-family: 'KG';
@@ -110,7 +104,7 @@
         border-radius: 1em;
         background-color: #f3efef;
         text-align: left;
-        padding-left: 10px;
+        padding: 6px;
         
         &.commentContentUser:hover:not(:focus){
             box-shadow: 2px 2px 2px #313030;
