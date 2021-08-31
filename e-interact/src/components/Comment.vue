@@ -78,11 +78,7 @@
             justify-content: center;
             transition: all 1s;
         }
-        
-        
-    }
-
-    .button{            
+        .button{            
         border: 1px rgb(223, 144, 196) solid;
         border-radius: 1rem;
         background-color: #ecbbbb;
@@ -91,8 +87,11 @@
         padding: 5px;
         margin-left: 6px;
         cursor: pointer;
-
     }
+        
+        
+    }
+    
 
     .commentUserBlock{
         width: 20%;
@@ -113,7 +112,7 @@
         text-align: left;
         padding-left: 10px;
         
-        &.commentContentUser:hover{
+        &.commentContentUser:hover:not(:focus){
             box-shadow: 2px 2px 2px #313030;
             cursor: pointer;
         }

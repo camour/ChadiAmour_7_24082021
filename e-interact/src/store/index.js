@@ -9,7 +9,7 @@ export default new Vuex.Store({
       authentification: (JSON.parse(localStorage.getItem('token'))) ? true : false,
       user:{
         userId: 0,
-        userName: 'test',
+        userName: '',
         lastName: '',
         firstName: '',
         job: ''
@@ -24,6 +24,10 @@ export default new Vuex.Store({
     DISABLE_AUTHENTIFICATION(state){
       state.authentification = false;
     },
+    SET_USER(state, payload){
+      state.user.userId = payload.userId;
+      state.user.userName = payload.userName;
+    },
     FILL_ARTICLES_ARRAY(state, payload){
       state.articlesArray = payload;
     }
@@ -35,6 +39,11 @@ export default new Vuex.Store({
       }
       else if(!payload){
         commit('DISABLE_AUTHENTIFICATION');
+      }
+    },
+    setUser({commit}, payload){
+      if(payload.userId && payload.userName){
+        commit('SET_USER', payload);
       }
     },
     fillArticlesArray({commit}, payload = []){

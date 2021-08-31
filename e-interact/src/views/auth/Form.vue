@@ -63,9 +63,10 @@
                     }
                 })
                 .then( (apiResponse) => {
-                    if(apiResponse.token){
+                    if(apiResponse.token && apiResponse.userId && apiResponse.userName){
                         this.$store.dispatch('setAuthentification',true);
                         localStorage.setItem('token', '123');
+                        this.$store.dispatch('setUser', {userId: apiResponse.userId, userName: apiResponse.userName});
                         this.$router.push('/');                                              
                     }else{
                         this.$router.push('/signIn');
