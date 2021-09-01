@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     export default{
         name: 'Form',
         props: {
@@ -45,6 +46,7 @@
             
         },
         methods: {
+            ...mapActions(['setAuthentification', 'setUser']),
             connect(){     
                 const endPoint = this.signUp ? 'signUp' : 'signIn';
                 fetch('http://localhost:3000/api/auth/' + endPoint, {
@@ -64,10 +66,10 @@
                 })
                 .then( (apiResponse) => {
                     if(apiResponse.token && apiResponse.userId && apiResponse.userName){
-                        this.$store.dispatch('setAuthentification',true);
+                        this.setAuthentification(true);
                         localStorage.setItem('token', '123');
                         localStorage.setItem('user', JSON.stringify({userName: apiResponse.userName}))
-                        this.$store.dispatch('setUser', {userId: apiResponse.userId, userName: apiResponse.userName});
+                        this.setUser({userId: apiResponse.userId, userName: apiResponse.userName});
                         this.$router.push('/');                                              
                     }else{
                         this.$router.push('/signIn');

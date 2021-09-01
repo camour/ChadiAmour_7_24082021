@@ -6,11 +6,11 @@
                 <p class="userName">{{ article.articleUserName }}</p>
             </div>
             <div class="article__post">
-                <h3 v-if="article.articleUserName != this.$store.state.user.userName" class="articleSubject">{{ article.articleSubject }}</h3>
-                <input v-if="article.articleUserName == this.$store.state.user.userName" type="text" :id="'articleSubject' + article.articleId" class="articleSubject articleSubjectUser" v-model="article.articleSubject"/>
-                <p v-if="article.articleUserName!=this.$store.state.user.userName" class="articleContent">{{ article.articleContent }}</p>
-                <textarea v-if="article.articleUserName == this.$store.state.user.userName" class="articleContent articleContentUser" v-model="article.articleContent"></textarea>                    
-                <div v-if="this.$store.state.user.userName == article.articleUserName" class="articleButtonsBlock" :id="'articleButtonsBlock' + article.articleId">
+                <h3 v-if="article.articleUserName != user.userName" class="articleSubject">{{ article.articleSubject }}</h3>
+                <input v-if="article.articleUserName == user.userName" type="text" :id="'articleSubject' + article.articleId" class="articleSubject articleSubjectUser" v-model="article.articleSubject"/>
+                <p v-if="article.articleUserName!= user.userName" class="articleContent">{{ article.articleContent }}</p>
+                <textarea v-if="article.articleUserName == user.userName" class="articleContent articleContentUser" v-model="article.articleContent"></textarea>                    
+                <div v-if="user.userName == article.articleUserName" class="articleButtonsBlock" :id="'articleButtonsBlock' + article.articleId">
                     <div class="articleButtons" :id="'articleButtons' + article.articleId">                   
                         <button class="button" :id="'saveButton' + article.articleId" @click="saveArticle">save</button>
                         <button class="button" :id="'deleteButton' + article.articleId" @click="deleteArticle">delete</button>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    import { mapState, mapActions } from 'vuex';
     import Comment from './Comment.vue';
     export default{
         name: 'Article',
@@ -38,7 +39,11 @@
                 type: Object,
             }
         },
-        methods: {
+        computed: {
+            ...mapState(['user']),
+        },
+        methods: {            
+            ...mapActions(['deleteArticle']),
             saveArticle(){
                 fetch('http://localhost:3000/api/articles/' + this.article.articleId, {
                     method: 'PUT',
@@ -47,7 +52,7 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                            userId: this.$store.state.user.userId,
+                            userId: this.user.userId,
                             articleSubject: this.article.articleSubject,
                             articleContent: this.article.articleContent,
                         })
@@ -69,7 +74,7 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        userId: this.$store.state.user.userId,
+                        userId: this.user.userId,
                         articleId: this.article.articleId
                     })
                 })
@@ -80,7 +85,7 @@
                 })
                 .then(result => {
                     console.log(result);
-                    this.$store.dispatch('deleteArticle', {index: this.index, articleId: this.article.articleId});
+                    this.deleteArticle({index: this.index, articleId: this.article.articleId});
                 });
             }
         }     

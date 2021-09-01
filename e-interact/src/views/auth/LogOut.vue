@@ -8,6 +8,7 @@
         name: 'LogOut',
         beforeMount(){
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             this.setAuthentification(false);            
         },
         methods: {
