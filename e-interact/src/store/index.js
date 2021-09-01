@@ -9,7 +9,7 @@ export default new Vuex.Store({
       authentification: (JSON.parse(localStorage.getItem('token'))) ? true : false,
       user:{
         userId: 0,
-        userName: '',
+        userName: (JSON.parse(localStorage.getItem('user'))) ? JSON.parse(localStorage.getItem('user')).userName  : '',
         lastName: '',
         firstName: '',
         job: ''
@@ -30,6 +30,9 @@ export default new Vuex.Store({
     },
     FILL_ARTICLES_ARRAY(state, payload){
       state.articlesArray = payload;
+    },
+    DELETE_ARTICLE(state, payload){
+      state.articlesArray.splice(payload.index, 1);
     }
   },
   actions: {
@@ -49,6 +52,11 @@ export default new Vuex.Store({
     fillArticlesArray({commit}, payload = []){
       if(payload){
         commit('FILL_ARTICLES_ARRAY', payload);
+      }
+    },
+    deleteArticle({commit}, payload){
+      if(payload){
+        commit('DELETE_ARTICLE', payload);
       }
     }
   },

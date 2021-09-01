@@ -3,6 +3,7 @@
 
         <Article v-for="(article, index) in articlesArray" 
         :article="article"
+        :index="index"
         :key="index"/>       
     </div>
     

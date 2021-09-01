@@ -13,7 +13,7 @@
                 <div v-if="this.$store.state.user.userName == article.articleUserName" class="articleButtonsBlock" :id="'articleButtonsBlock' + article.articleId">
                     <div class="articleButtons" :id="'articleButtons' + article.articleId">                   
                         <button class="button" :id="'saveButton' + article.articleId" @click="saveArticle">save</button>
-                        <button class="button" :id="'deleteButton' + article.articleId">delete</button>
+                        <button class="button" :id="'deleteButton' + article.articleId" @click="deleteArticle">delete</button>
                     </div>
                 </div>   
             </div>                     
@@ -31,6 +31,9 @@
             Comment
         },
         props: {
+            index: {
+                type: Number
+            },
             article: {
                 type: Object,
             }
@@ -51,8 +54,33 @@
                 })
                 .then(result => {
                     if(result.ok){
-                        console.log('ARTICLE MODIFIE !'); 
+                        return result.json(); 
                     }
+                })
+                .then(result => {
+                    console.log(result);
+                });
+            },
+            deleteArticle(){
+                fetch('http://localhost:3000/api/articles/' + this.article.articleId,{
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: this.$store.state.user.userId,
+                        articleId: this.article.articleId
+                    })
+                })
+                .then(result => {
+                    if(result.ok){
+                        return result.json();
+                    }
+                })
+                .then(result => {
+                    console.log(result);
+                    this.$store.dispatch('deleteArticle', {index: this.index, articleId: this.article.articleId});
                 });
             }
         }     

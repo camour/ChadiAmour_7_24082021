@@ -66,6 +66,7 @@
                     if(apiResponse.token && apiResponse.userId && apiResponse.userName){
                         this.$store.dispatch('setAuthentification',true);
                         localStorage.setItem('token', '123');
+                        localStorage.setItem('user', JSON.stringify({userName: apiResponse.userName}))
                         this.$store.dispatch('setUser', {userId: apiResponse.userId, userName: apiResponse.userName});
                         this.$router.push('/');                                              
                     }else{
