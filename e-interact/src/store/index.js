@@ -33,6 +33,9 @@ export default new Vuex.Store({
     },
     DELETE_ARTICLE(state, payload){
       state.articlesArray.splice(payload.index, 1);
+    },
+    ADD_NEW_ARTICLE(state, payload){
+      state.articlesArray.unshift(payload);
     }
   },
   actions: {
@@ -57,6 +60,11 @@ export default new Vuex.Store({
     deleteArticle({commit}, payload){
       if(payload){
         commit('DELETE_ARTICLE', payload);
+      }
+    },
+    addNewArticle({commit}, payload){
+      if(payload){
+        commit('ADD_NEW_ARTICLE', payload);
       }
     }
   },
