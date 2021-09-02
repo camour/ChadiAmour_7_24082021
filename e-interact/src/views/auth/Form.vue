@@ -32,8 +32,8 @@
         data(){
             if(!this.signUp){
                 return{
-                    userName: 'test',
-                    password: 'test'                
+                    userName: 'test3',
+                    password: 'test3'                
                 };
             }
             else if(this.signUp){

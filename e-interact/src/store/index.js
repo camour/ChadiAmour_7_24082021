@@ -31,7 +31,10 @@ export default new Vuex.Store({
     FILL_ARTICLES_ARRAY(state, payload){
       state.articlesArray = payload;
     },
-    DELETE_ARTICLE(state, payload){
+    SAVE_ARTICLE_LOCALLY(state, payload){
+      state.articlesArray.splice(payload.index, 1, payload.article);
+    },
+    DELETE_ARTICLE_LOCALLY(state, payload){
       state.articlesArray.splice(payload.index, 1);
     },
     ADD_NEW_ARTICLE(state, payload){
@@ -57,14 +60,21 @@ export default new Vuex.Store({
         commit('FILL_ARTICLES_ARRAY', payload);
       }
     },
-    deleteArticle({commit}, payload){
+    saveArticleLocally({commit}, payload){
       if(payload){
-        commit('DELETE_ARTICLE', payload);
+        commit('SAVE_ARTICLE_LOCALLY', payload);
+      }
+    },
+    deleteArticleLocally({commit}, payload){
+      if(payload){
+        commit('DELETE_ARTICLE_LOCALLY', payload);
       }
     },
     addNewArticle({commit}, payload){
       if(payload){
-        commit('ADD_NEW_ARTICLE', payload);
+        if(payload.articleId && payload.articleUserName && payload.articleSubject && payload.articleContent && payload.articlePublishingDate){
+          commit('ADD_NEW_ARTICLE', payload);
+        }
       }
     }
   },

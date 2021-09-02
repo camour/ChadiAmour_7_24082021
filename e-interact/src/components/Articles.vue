@@ -45,11 +45,10 @@
             },
             saveNewArticle(){
                 this.showTextArea = false;
-                let newArticleToAdd = {
-                        articleUserName: this.user.userName,
+                let newArticleToAdd = {                        
                         articleSubject: this.newArticle.subject,
                         articleContent: this.newArticle.content,
-                        articlePublishingDate: new Date().toISOString().slice(0, 19).replace('T', ' ')
+                        articlePublishingDate: new Date().toISOString().slice(0, 19).replace('T', ' '),
                     };
                 fetch('http://localhost:3000/api/articles', {
                     method: 'POST',
@@ -69,6 +68,11 @@
                 })
                 .then(result => {
                     newArticleToAdd.articleId = result.articleId;
+                    newArticleToAdd.comments = new Array();
+                    // if and only if API return success, we can add userName to new Article object
+                    // so userName is not transmitted through network 
+                    //(to prevent from MAN IN THE MIDDLE ATTACK)
+                    newArticleToAdd.articleUserName = this.user.userName;
                     this.addNewArticle(newArticleToAdd);
                 });
             },

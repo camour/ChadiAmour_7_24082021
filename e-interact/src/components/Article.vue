@@ -43,7 +43,7 @@
             ...mapState(['user']),
         },
         methods: {            
-            ...mapActions(['deleteArticle']),
+            ...mapActions(['saveArticleLocally', 'deleteArticleLocally']),
             saveArticle(){
                 fetch('http://localhost:3000/api/articles/' + this.article.articleId, {
                     method: 'PUT',
@@ -62,8 +62,8 @@
                         return result.json(); 
                     }
                 })
-                .then(result => {
-                    console.log(result);
+                .then(() => {
+                    this.saveArticleLocally({index: this.index, article: this.article});
                 });
             },
             deleteArticle(){
@@ -85,7 +85,7 @@
                 })
                 .then(result => {
                     console.log(result);
-                    this.deleteArticle({index: this.index, articleId: this.article.articleId});
+                    this.deleteArticleLocally({index: this.index, articleId: this.article.articleId});
                 });
             }
         }     
