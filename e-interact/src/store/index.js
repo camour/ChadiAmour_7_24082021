@@ -7,13 +7,7 @@ export default new Vuex.Store({
   state(){
     return{
       authentification: (JSON.parse(localStorage.getItem('token'))) ? true : false,
-      user:{
-        userId: 0,
-        userName: (JSON.parse(localStorage.getItem('user'))) ? JSON.parse(localStorage.getItem('user')).userName  : '',
-        lastName: '',
-        firstName: '',
-        job: ''
-      },
+      user: (JSON.parse(localStorage.getItem('user'))) ? JSON.parse(localStorage.getItem('user')) : {userId: 0, userName: ''},
       articlesArray: []
     }
   },

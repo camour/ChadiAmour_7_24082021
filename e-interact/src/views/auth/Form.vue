@@ -65,11 +65,11 @@
                     }
                 })
                 .then( (apiResponse) => {
-                    if(apiResponse.token && apiResponse.userId && apiResponse.userName){
+                    if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName){
                         this.setAuthentification(true);
                         localStorage.setItem('token', '123');
-                        localStorage.setItem('user', JSON.stringify({userName: apiResponse.userName}))
-                        this.setUser({userId: apiResponse.userId, userName: apiResponse.userName});
+                        localStorage.setItem('user', JSON.stringify(apiResponse.user));
+                        this.setUser(apiResponse.user);
                         this.$router.push('/');                                              
                     }else{
                         this.$router.push('/signIn');
