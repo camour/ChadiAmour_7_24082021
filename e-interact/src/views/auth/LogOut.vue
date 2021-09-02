@@ -7,8 +7,7 @@
     export default{
         name: 'LogOut',
         beforeMount(){
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.clear();
             this.setAuthentification(false);            
         },
         methods: {

@@ -7,13 +7,13 @@
             </div>
             <div class="article__post">
                 <h3 v-if="article.articleUserName != user.userName" class="articleSubject">{{ article.articleSubject }}</h3>
-                <input v-if="article.articleUserName == user.userName" type="text" :id="'articleSubject' + article.articleId" class="articleSubject articleSubjectUser" v-model="article.articleSubject"/>
+                <input v-if="article.articleUserName == user.userName" type="text" :id="'articleSubject' + article.articleId" class="articleSubject articleSubjectUser" v-model="article.articleSubject" @focus="enableButtons"/>
                 <p v-if="article.articleUserName!= user.userName" class="articleContent">{{ article.articleContent }}</p>
-                <textarea v-if="article.articleUserName == user.userName" class="articleContent articleContentUser" v-model="article.articleContent"></textarea>                    
+                <textarea v-if="article.articleUserName == user.userName" class="articleContent articleContentUser" v-model="article.articleContent" @focus="enableButtons"></textarea>                    
                 <div v-if="user.userName == article.articleUserName" class="articleButtonsBlock" :id="'articleButtonsBlock' + article.articleId">
                     <div class="articleButtons" :id="'articleButtons' + article.articleId">                   
-                        <button class="button" :id="'saveButton' + article.articleId" @click="saveArticle">save</button>
-                        <button class="button" :id="'deleteButton' + article.articleId" @click="deleteArticle">delete</button>
+                        <button class="button" :id="'saveButton' + article.articleId" disabled @click="saveArticle">save</button>
+                        <button class="button" :id="'deleteButton' + article.articleId" disabled @click="deleteArticle">delete</button>
                     </div>
                 </div>   
             </div>                     
@@ -44,17 +44,29 @@
         },
         methods: {            
             ...mapActions(['saveArticleLocally', 'deleteArticleLocally']),
+            enableButtons(){
+                document.getElementById('saveButton'+this.article.articleId).removeAttribute('disabled');
+                document.getElementById('deleteButton'+this.article.articleId).removeAttribute('disabled');
+            },
+            disableButtons(){
+                document.getElementById('saveButton'+this.article.articleId).setAttribute('disabled');
+                document.getElementById('deleteButton'+this.article.articleId).setAttribute('disabled');
+            },
             saveArticle(){
                 fetch('http://localhost:3000/api/articles/' + this.article.articleId, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+
                     },
                     body: JSON.stringify({
                             userId: this.user.userId,
-                            articleSubject: this.article.articleSubject,
-                            articleContent: this.article.articleContent,
+                            article: { 
+                                articleSubject: this.article.articleSubject,
+                                articleContent: this.article.articleContent
+                            }                           
                         })
                 })
                 .then(result => {
@@ -64,6 +76,7 @@
                 })
                 .then(() => {
                     this.saveArticleLocally({index: this.index, article: this.article});
+                    this.disableButtons();
                 });
             },
             deleteArticle(){
@@ -71,11 +84,11 @@
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
                     },
                     body: JSON.stringify({
-                        userId: this.user.userId,
-                        articleId: this.article.articleId
+                        userId: this.user.userId,                       
                     })
                 })
                 .then(result => {
@@ -83,9 +96,9 @@
                         return result.json();
                     }
                 })
-                .then(result => {
-                    console.log(result);
+                .then(() => {
                     this.deleteArticleLocally({index: this.index, articleId: this.article.articleId});
+                    this.disableButtons();
                 });
             }
         }     
@@ -179,19 +192,24 @@
             font-weight: bolder;
             padding: 5px;
             margin-left: 6px;
-            cursor: pointer;
         }      
     }
 
     .articleSubject:focus{
         & + .articleContent + .articleButtonsBlock  > .articleButtons{
             opacity: 1;
+            button{
+                cursor: pointer;
+            }
         }
     }
 
     .articleContent:focus{
         & + .articleButtonsBlock > .articleButtons{
             opacity: 1;
+            button{
+                cursor: pointer;
+            }
         }
     }
 

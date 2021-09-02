@@ -67,12 +67,15 @@
                 .then( (apiResponse) => {
                     if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName){
                         this.setAuthentification(true);
-                        localStorage.setItem('token', '123');
+                        console.log(apiResponse);
+                        localStorage.setItem('token', JSON.stringify(apiResponse.token));
                         localStorage.setItem('user', JSON.stringify(apiResponse.user));
                         this.setUser(apiResponse.user);
                         this.$router.push('/');                                              
                     }else{
-                        this.$router.push('/signIn');
+                        if(endPoint == 'signUp'){
+                            this.$router.push('/signIn');
+                        }                        
                     }                     
                 })
                 .catch();
