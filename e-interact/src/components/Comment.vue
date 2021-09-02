@@ -2,6 +2,7 @@
     <div class="commentBlock">
         <div class="commentUserBlock">
             <div class="commentUser">{{ comment.commentUserName }}</div>
+            <p class="commentDate">{{ displayRearangedDate }}</p>
         </div>
         <div class="comment">          
             <div v-show="this.$store.state.user.userName!=comment.commentUserName" class="commentContent">{{ comment.commentContent }}</div>
@@ -12,6 +13,15 @@
                     <button class="button" :id="'deleteButton' + comment.commentId" @click="deleteComment">delete</button>
                 </div>
             </div>
+        </div>
+        <button id="newComment" v-show="!showTextArea" @click="enableTextArea">+ new comment</button>
+        <div class="newCommentBlock" v-show="showTextArea">
+            <textarea class="newCommentContent" v-model="newComment" placeholder="comment.."></textarea>
+            <div class="newCommentButtonsBlock">   
+                <button @click="saveNewComment">save</button>
+                <button @click="cancelNewComment">cancel</button>
+            </div>
+            <hr>
         </div>
     </div>    
 </template>
@@ -24,7 +34,27 @@
                 type: Object
             }
         },
+        data(){
+            return {
+                showTextArea: false,
+                newComment: ''
+            }
+        },
+        computed: {
+            displayRearangedDate(){
+                return this.comment.commentPublishingDate.slice(0,19).replace('T', ' ');
+            }
+        },
         methods: {
+            enableTextArea(){
+                this.showTextArea = true;
+            },
+            saveNewComment(){
+                this.showTextArea = false;
+            },
+            cancelNewComment(){
+                this.showTextArea = false;
+            },
             saveComment(){
                 
             },
@@ -68,9 +98,13 @@
     }
 
     .commentUser{
-        width: 90%;
+        width: 90%;        
         margin: auto;
+        margin-top: 8px;
         border: 1px rgb(234, 228, 245) solid;
+    }
+    .commentDate{
+        font-size: 0.8em;
     }
     .commentButtons{
         position: relative;

@@ -4,6 +4,7 @@
         <div class="article">
             <div class="article__user">
                 <p class="userName">{{ article.articleUserName }}</p>
+                <p>{{ displayRearangedDate }}</p>
             </div>
             <div class="article__post">
                 <h3 v-if="article.articleUserName != user.userName" class="articleSubject">{{ article.articleSubject }}</h3>
@@ -41,6 +42,9 @@
         },
         computed: {
             ...mapState(['user']),
+            displayRearangedDate(){
+                return this.article.articlePublishingDate.slice(0,19).replace('T', ' ');
+            }
         },
         methods: {            
             ...mapActions(['saveArticleLocally', 'deleteArticleLocally']),
@@ -49,8 +53,8 @@
                 document.getElementById('deleteButton'+this.article.articleId).removeAttribute('disabled');
             },
             disableButtons(){
-                document.getElementById('saveButton'+this.article.articleId).setAttribute('disabled');
-                document.getElementById('deleteButton'+this.article.articleId).setAttribute('disabled');
+                document.getElementById('saveButton'+this.article.articleId).setAttribute('disabled', true);
+                document.getElementById('deleteButton'+this.article.articleId).setAttribute('disabled', true);
             },
             saveArticle(){
                 fetch('http://localhost:3000/api/articles/' + this.article.articleId, {

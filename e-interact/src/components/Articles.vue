@@ -48,7 +48,7 @@
                 let newArticleToAdd = {                        
                         articleSubject: this.newArticle.subject,
                         articleContent: this.newArticle.content,
-                        articlePublishingDate: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                        articlePublishingDate: new Date().toISOString().slice(0,19).replace('T', ' '),
                     };
                 fetch('http://localhost:3000/api/articles', {
                     method: 'POST',
@@ -90,7 +90,7 @@
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
     }
     .articles{
-        width: 600px;
+        width: 650px;
         margin: auto;
         position: relative; 
     }
