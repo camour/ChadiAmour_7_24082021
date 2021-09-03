@@ -1,17 +1,19 @@
 
-const defaultHeaders = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-};
 
-exports.send = (url, method, headers, body = null) =>{
-
+exports.send = (url, method = 'GET', body) =>{
+    let defaultHeaders = new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    });
+    if(JSON.parse(localStorage.getItem('token'))){
+        defaultHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('token')));
+    }
     const httpParameters = {
-        method: method ? method : 'GET',
-        headers: headers ? headers : defaultHeaders,
+        method: method,
+        headers: defaultHeaders,
     };
     if(body != null) {
-        httpParameters.body = body
+        httpParameters.body = JSON.stringify(body);
     }
-    return fetch(url,httpParameters);
+    return fetch(url, httpParameters);
 };

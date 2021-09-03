@@ -36,6 +36,7 @@
 <script>
     import { mapState, mapActions } from 'vuex';
     import Comment from './Comment.vue';
+    const apiCommunication = require('../api/communication');
     export default{
         name: 'Article',
         components: {
@@ -72,21 +73,12 @@
                 document.getElementById('deleteButton'+this.article.articleId).setAttribute('disabled', true);
             },
             saveArticle(){
-                fetch('http://localhost:3000/api/articles/' + this.article.articleId, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-
-                    },
-                    body: JSON.stringify({
+                apiCommunication.send('http://localhost:3000/api/articles/' + this.article.articleId, 'PUT',{
                             userId: this.user.userId,
                             article: { 
                                 articleSubject: this.article.articleSubject,
                                 articleContent: this.article.articleContent
-                            }                           
-                        })
+                            }                          
                 })
                 .then(result => {
                     if(result.ok){
@@ -99,17 +91,7 @@
                 });
             },
             deleteArticle(){
-                fetch('http://localhost:3000/api/articles/' + this.article.articleId,{
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-                    },
-                    body: JSON.stringify({
-                        userId: this.user.userId,                       
-                    })
-                })
+                apiCommunication.send('http://localhost:3000/api/articles/' + this.article.articleId, 'DELETE',{ userId: this.user.userId})
                 .then(result => {
                     if(result.ok){
                         return result.json();
@@ -129,15 +111,7 @@
                     commentContent: this.newCommentContent,
                     commentPublishingDate: new Date().toISOString().slice(0,19).replace('T', ' ')
                 };
-                fetch('http://localhost:3000/api/comments/' + this.article.articleId, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-                    },
-                    body: JSON.stringify({userId: this.user.userId, newCommentToAdd})
-                })
+                apiCommunication.send('http://localhost:3000/api/comments/' + this.article.articleId, 'POST', { userId: this.user.userId, newCommentToAdd})
                 .then(result => {
                     if(result.ok){
                         return result.json();

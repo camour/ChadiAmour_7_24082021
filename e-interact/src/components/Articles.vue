@@ -21,6 +21,7 @@
 <script>
     import { mapState, mapActions } from 'vuex';
     import Article from './Article.vue';
+    const apiCommunication = require('../api/communication');
     export default{
         name: 'Articles',
         components: {
@@ -50,18 +51,7 @@
                         articleContent: this.newArticle.content,
                         articlePublishingDate: new Date().toISOString().slice(0,19).replace('T', ' '),
                     };
-                fetch('http://localhost:3000/api/articles', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-                    },
-                    body: JSON.stringify({
-                        userId: this.user.userId,
-                        newArticleToAdd
-                        })
-                })
+                apiCommunication.send('http://localhost:3000/api/articles', 'POST', { userId: this.user.userId, newArticleToAdd})
                 .then(result => {
                     if(result.ok){
                         return result.json();

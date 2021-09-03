@@ -7,8 +7,9 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState, mapActions } from 'vuex';
   import Articles from '../../components/Articles.vue';
+  const apiCommunication = require('../../api/communication');
   export default {
     name: 'Home',
     components: {
@@ -17,22 +18,18 @@
     computed: {
       ...mapState(['user']),
     },
+    methods: {
+      ...mapActions(['fillArticlesArray']),
+    },
     beforeMount(){
-      fetch('http://localhost:3000/api/articles',{
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-        }
-      })
+      apiCommunication.send('http://localhost:3000/api/articles')
       .then(result => {
         if(result.ok){
           return result.json();
         }
       })
       .then(objectResult => {        
-        this.$store.dispatch('fillArticlesArray', objectResult.articlesArray);  
+        this.fillArticlesArray(objectResult.articlesArray);  
       })
       .catch();
     }
