@@ -23,6 +23,9 @@
         props: {
             comment: {
                 type: Object
+            },
+            articleId: {
+                type: Number
             }
         },        
         computed: {
