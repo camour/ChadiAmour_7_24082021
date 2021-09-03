@@ -13,16 +13,7 @@
                     <button class="button" :id="'deleteButton' + comment.commentId" @click="deleteComment">delete</button>
                 </div>
             </div>
-        </div>
-        <button id="newComment" v-show="!showTextArea" @click="enableTextArea">+ new comment</button>
-        <div class="newCommentBlock" v-show="showTextArea">
-            <textarea class="newCommentContent" v-model="newComment" placeholder="comment.."></textarea>
-            <div class="newCommentButtonsBlock">   
-                <button @click="saveNewComment">save</button>
-                <button @click="cancelNewComment">cancel</button>
-            </div>
-            <hr>
-        </div>
+        </div>        
     </div>    
 </template>
 
@@ -33,28 +24,13 @@
             comment: {
                 type: Object
             }
-        },
-        data(){
-            return {
-                showTextArea: false,
-                newComment: ''
-            }
-        },
+        },        
         computed: {
             displayRearangedDate(){
                 return this.comment.commentPublishingDate.slice(0,19).replace('T', ' ');
             }
         },
-        methods: {
-            enableTextArea(){
-                this.showTextArea = true;
-            },
-            saveNewComment(){
-                this.showTextArea = false;
-            },
-            cancelNewComment(){
-                this.showTextArea = false;
-            },
+        methods: {            
             saveComment(){
                 
             },

@@ -20,6 +20,15 @@
             </div>                     
         </div>
         <Comment v-for="(comment, index) in article.comments" :key="index" :comment="comment"/>
+        <button id="newCommentButton" v-show="!showNewCommentTextArea" @click="enableNewCommentTextArea">+ new comment</button>
+        <div class="newCommentBlock" v-show="showNewCommentTextArea">
+            <textarea class="newCommentContent" v-model="newCommentContent">comment...</textarea>
+            <div class="newCommentButtonsBlock">   
+                <button @click="saveNewComment">save</button>
+                <button @click="cancelNewComment">cancel</button>
+            </div>
+            <hr>
+        </div>        
     </div>
     
 </template>
@@ -31,13 +40,19 @@
         name: 'Article',
         components: {
             Comment
-        },
+        },        
         props: {
             index: {
                 type: Number
             },
             article: {
                 type: Object,
+            }
+        },
+        data(){
+            return {
+                showNewCommentTextArea: false,
+                newCommentContent: ''
             }
         },
         computed: {
@@ -47,7 +62,7 @@
             }
         },
         methods: {            
-            ...mapActions(['saveArticleLocally', 'deleteArticleLocally']),
+            ...mapActions(['saveArticleLocally', 'deleteArticleLocally', 'addNewComment']),
             enableButtons(){
                 document.getElementById('saveButton'+this.article.articleId).removeAttribute('disabled');
                 document.getElementById('deleteButton'+this.article.articleId).removeAttribute('disabled');
@@ -104,7 +119,40 @@
                     this.deleteArticleLocally({index: this.index, articleId: this.article.articleId});
                     this.disableButtons();
                 });
-            }
+            },
+            enableNewCommentTextArea(){
+                this.showNewCommentTextArea = true;
+            },
+            saveNewComment(){
+                this.showNewCommentTextArea = false;
+                let newCommentToAdd = {
+                    commentContent: this.newCommentContent,
+                    commentPublishingDate: new Date().toISOString().slice(0,19).replace('T', ' ')
+                };
+                fetch('http://localhost:3000/api/comments/' + this.article.articleId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+                    },
+                    body: JSON.stringify({userId: this.user.userId, newCommentToAdd})
+                })
+                .then(result => {
+                    if(result.ok){
+                        return result.json();
+                    }
+                })
+                .then(result => {
+                    newCommentToAdd.commentUserName = this.user.userName;
+                    newCommentToAdd.commentId = result.commentId;
+                    this.addNewComment({articleIndex: this.index, newCommentToAdd});
+                })
+                .catch();
+            },
+            cancelNewComment(){
+                this.showNewCommentTextArea = false;
+            },
         }     
     }
 
@@ -214,6 +262,49 @@
             button{
                 cursor: pointer;
             }
+        }
+    }
+
+    #newCommentButton{       
+        box-shadow: 2px 2px 3px black;
+        border: 2px black solid;
+        background-color: #f89e9e;
+        border-radius: 10rem;
+        position: relative;
+        width: 130px;
+        margin: auto;
+        margin-bottom: 30px;
+        font-size: 0.9;
+        cursor: pointer;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+    .newCommentBlock{
+        margin-top: 20px;
+
+        button{
+            border: 1px rgb(223, 144, 196) solid;
+            border-radius: 1rem;
+            background-color: #ecbbbb;
+            box-shadow: 1px 1px 3px rgb(223, 144, 196);
+            font-weight: bolder;
+            padding: 5px;
+            margin-left: 6px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        textarea{
+            width: 80%;
+            margin: auto;
+            height: 100px;
+            text-align: center;
+            border: 1px #bdb2b2 solid; 
+            border-radius: 1em;
+            background-color: rgb(243, 239, 239);
+            font-family: 'KG', sans-serif;
+            font-size: 1.1em;
+            overflow: hidden;
         }
     }
 

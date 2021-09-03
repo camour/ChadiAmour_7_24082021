@@ -7,11 +7,15 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import Articles from '../../components/Articles.vue';
   export default {
     name: 'Home',
     components: {
       Articles
+    },
+    computed: {
+      ...mapState(['user']),
     },
     beforeMount(){
       fetch('http://localhost:3000/api/articles',{

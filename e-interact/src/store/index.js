@@ -33,6 +33,9 @@ export default new Vuex.Store({
     },
     ADD_NEW_ARTICLE(state, payload){
       state.articlesArray.unshift(payload);
+    },
+    ADD_NEW_COMMENT(state, payload){
+      state.articlesArray[payload.articleIndex].comments.unshift(payload.newCommentToAdd);
     }
   },
   actions: {
@@ -69,6 +72,11 @@ export default new Vuex.Store({
         if(payload.articleId && payload.articleUserName && payload.articleSubject && payload.articleContent && payload.articlePublishingDate){
           commit('ADD_NEW_ARTICLE', payload);
         }
+      }
+    },
+    addNewComment({commit},  payload){      
+      if((payload.articleIndex >= 0) && payload.newCommentToAdd){
+        commit('ADD_NEW_COMMENT', payload);
       }
     }
   },
