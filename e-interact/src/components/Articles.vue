@@ -10,10 +10,10 @@
             </div>
             <hr>
         </div>
-        <Article v-for="(article, index) in articlesArray" 
+        <Article v-for="(article, articleIndex) in articlesArray" 
         :article="article"
-        :index="index"
-        :key="index"/>      
+        :articleIndex="articleIndex"
+        :key="articleIndex"/>      
     </div>
     
 </template>

@@ -19,7 +19,7 @@
                 </div>   
             </div>                     
         </div>
-        <Comment v-for="(comment, index) in article.comments" :key="index" :comment="comment"/>
+        <Comment v-for="(comment, commentIndex) in article.comments" :key="commentIndex" :comment="comment" :commentIndex="commentIndex" :articleIndex="articleIndex"/>
         <button id="newCommentButton" v-show="!showNewCommentTextArea" @click="enableNewCommentTextArea">+ new comment</button>
         <div class="newCommentBlock" v-show="showNewCommentTextArea">
             <textarea class="newCommentContent" v-model="newCommentContent">comment...</textarea>
@@ -43,7 +43,7 @@
             Comment
         },        
         props: {
-            index: {
+            articleIndex: {
                 type: Number
             },
             article: {
@@ -86,7 +86,7 @@
                     }
                 })
                 .then(() => {
-                    this.saveArticleLocally({index: this.index, article: this.article});
+                    this.saveArticleLocally({articleIndex: this.articleIndex, article: this.article});
                     this.disableButtons();
                 });
             },
@@ -98,7 +98,7 @@
                     }
                 })
                 .then(() => {
-                    this.deleteArticleLocally({index: this.index, articleId: this.article.articleId});
+                    this.deleteArticleLocally({articleIndex: this.articleIndex, articleId: this.article.articleId});
                     this.disableButtons();
                 });
             },
@@ -120,7 +120,7 @@
                 .then(result => {
                     newCommentToAdd.commentUserName = this.user.userName;
                     newCommentToAdd.commentId = result.commentId;
-                    this.addNewComment({articleIndex: this.index, newCommentToAdd});
+                    this.addNewComment({articleIndex: this.articleIndex, newCommentToAdd});
                 })
                 .catch();
             },

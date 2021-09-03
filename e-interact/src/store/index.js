@@ -26,13 +26,19 @@ export default new Vuex.Store({
       state.articlesArray = payload;
     },
     SAVE_ARTICLE_LOCALLY(state, payload){
-      state.articlesArray.splice(payload.index, 1, payload.article);
+      state.articlesArray.splice(payload.articleIndex, 1, payload.article);
     },
     DELETE_ARTICLE_LOCALLY(state, payload){
-      state.articlesArray.splice(payload.index, 1);
+      state.articlesArray.splice(payload.articleIndex, 1);
     },
     ADD_NEW_ARTICLE(state, payload){
       state.articlesArray.unshift(payload);
+    },
+    SAVE_COMMENT_LOCALLY(state, payload){
+      state.articlesArray[payload.articleIndex].comments.splice(payload.commentIndex, 1, payload.comment);
+    },
+    DELETE_COMMENT_LOCALLY(state, payload){
+      state.articlesArray[payload.articleIndex].comments.splice(payload.commentIndex, 1);
     },
     ADD_NEW_COMMENT(state, payload){
       state.articlesArray[payload.articleIndex].comments.unshift(payload.newCommentToAdd);
@@ -72,6 +78,16 @@ export default new Vuex.Store({
         if(payload.articleId && payload.articleUserName && payload.articleSubject && payload.articleContent && payload.articlePublishingDate){
           commit('ADD_NEW_ARTICLE', payload);
         }
+      }
+    },
+    saveCommentLocally({commit}, payload){
+      if((payload.articleIndex >= 0) && (payload.comment) && (payload.commentIndex >= 0)){
+        commit('SAVE_COMMENT_LOCALLY', payload);
+      }
+    },
+    deleteCommentLocally({commit}, payload){
+      if((payload.articleIndex >= 0) && (payload.commentIndex >= 0)){
+        commit('DELETE_COMMENT_LOCALLY', payload);
       }
     },
     addNewComment({commit},  payload){      

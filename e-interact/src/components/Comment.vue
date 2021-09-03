@@ -5,9 +5,9 @@
             <p class="commentDate">{{ displayRearangedDate }}</p>
         </div>
         <div class="comment">          
-            <div v-show="this.$store.state.user.userName!=comment.commentUserName" class="commentContent">{{ comment.commentContent }}</div>
-            <textarea v-show="this.$store.state.user.userName==comment.commentUserName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
-            <div v-show="this.$store.state.user.userName==comment.commentUserName" class="commentButtons">                
+            <div v-show="this.user.userName!=comment.commentUserName" class="commentContent">{{ comment.commentContent }}</div>
+            <textarea v-show="this.user.userName==comment.commentUserName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
+            <div v-show="this.user.userName==comment.commentUserName" class="commentButtons">                
                 <div class="buttonsBlock" :id="'buttonsBlock' + comment.commentId">                    
                     <button class="button" :id="'saveButton' + comment.commentId" @click="saveComment">save</button>
                     <button class="button" :id="'deleteButton' + comment.commentId" @click="deleteComment">delete</button>
@@ -18,27 +18,44 @@
 </template>
 
 <script>
+    import { mapState, mapActions } from 'vuex';
+    const apiCommunication = require('../api/communication');
     export default{
         name: 'Comment',
         props: {
             comment: {
                 type: Object
             },
-            articleId: {
+            commentIndex :{
+                type: Number
+            },
+            articleIndex: {
                 type: Number
             }
         },        
         computed: {
+            ...mapState(['user', 'articlesArray']),
             displayRearangedDate(){
                 return this.comment.commentPublishingDate.slice(0,19).replace('T', ' ');
             }
         },
-        methods: {            
+        methods: {   
+            ...mapActions(['saveCommentLocally', 'deleteCommentLocally']),         
             saveComment(){
-                
+                apiCommunication.send('http://localhost:3000/api/comments/' + this.comment.commentId, 'PUT', {userId: this.user.userId, 
+                comment: {commentContent: this.comment.commentContent, commentArticleId: this.articlesArray[this.articleIndex].articleId}})
+                .then(() => {
+                    this.saveCommentLocally({articleIndex: this.articleIndex, commentIndex: this.commentIndex, comment: this.comment});
+                })
+                .catch();
             },
             deleteComment(){
-                
+                apiCommunication.send('http://localhost:3000/api/comments/' + this.comment.commentId, 'DELETE', 
+                { userId: this.user.userId, comment: {commentArticleId: this.articlesArray[this.articleIndex].articleId}})
+                .then(() => {
+                    this.deleteCommentLocally({articleIndex: this.articleIndex, commentIndex: this.commentIndex});
+                })
+                .catch();
             }
         }
     }
