@@ -63,7 +63,7 @@
                         }
                     })
                     .then( (apiResponse) => {
-                        if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName){
+                        if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName && apiResponse.user.image){
                             this.setAuthentification(true);
                             localStorage.setItem('token', JSON.stringify(apiResponse.token));
                             localStorage.setItem('user', JSON.stringify(apiResponse.user));
@@ -89,8 +89,7 @@
                             return result.json();
                         }
                     })
-                    .then(result => {
-                        console.log(result);
+                    .then(() => {
                         this.$router.push('/signIn');
                     })
                     .catch(error => {

@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state(){
     return{
       authentification: (JSON.parse(localStorage.getItem('token'))) ? true : false,
-      user: (JSON.parse(localStorage.getItem('user'))) ? JSON.parse(localStorage.getItem('user')) : {userId: 0, userName: ''},
+      user: (JSON.parse(localStorage.getItem('user'))) ? 
+      {userId: JSON.parse(localStorage.getItem('user')).userId, userName: JSON.parse(localStorage.getItem('user')).userName, image: JSON.parse(localStorage.getItem('user')).image}
+      : {userId: 0, userName: '', image: ''},
       articlesArray: []
     }
   },
@@ -21,6 +23,7 @@ export default new Vuex.Store({
     SET_USER(state, payload){
       state.user.userId = payload.userId;
       state.user.userName = payload.userName;
+      state.user.image = payload.image;
     },
     FILL_ARTICLES_ARRAY(state, payload){
       state.articlesArray = payload;
@@ -54,7 +57,7 @@ export default new Vuex.Store({
       }
     },
     setUser({commit}, payload){
-      if(payload.userId && payload.userName){
+      if(payload.userId && payload.userName && payload.image){
         commit('SET_USER', payload);
       }
     },
