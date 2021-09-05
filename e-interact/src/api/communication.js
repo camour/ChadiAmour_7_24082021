@@ -12,6 +12,7 @@ exports.send = (url, method = 'GET', body) =>{
         method: method,
         headers: defaultHeaders,
     };
+
     if(body != null) {
         httpParameters.body = JSON.stringify(body);
     }

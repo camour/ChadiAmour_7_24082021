@@ -3,7 +3,7 @@
             <div v-if="signUp">
                 <label for="email">email</label>
                 <input type="email" name="email" id="email" v-model="email"/>
-            </div>
+            </div>           
 
             <div>
                 <label for="userName">user name</label>
@@ -14,14 +14,21 @@
                 <label for="password">password</label>
                 <input type ="password" name="password" id="password" v-model="password"/>
             </div>
+
+            <div v-if="signUp">
+                <label for="image">profile image</label>
+                <input type="file" name="image" id="image" title=" "/>
+            </div>
+
             <div>
-                <button type="submit" id="submitButton" @click="connect">submit</button>
+                <button type="submit" id="submitButton" @click="sendForm">submit</button>
             </div>           
     </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
+    const apiCommunication = require('../../api/communication');
     export default{
         name: 'Form',
         props: {
@@ -47,38 +54,49 @@
         },
         methods: {
             ...mapActions(['setAuthentification', 'setUser']),
-            connect(){     
-                const endPoint = this.signUp ? 'signUp' : 'signIn';
-                fetch('http://localhost:3000/api/auth/' + endPoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                            ...this.$data
+            sendForm(){
+                if(!this.signUp){  
+                    apiCommunication.send('http://localhost:3000/api/auth/signIn', 'POST', {...this.$data})
+                    .then(result => {
+                        if(result.ok){                        
+                            return result.json();                          
+                        }
                     })
-                })
-                .then(result => {
-                    if(result.ok){                        
-                        return result.json();                          
-                    }
-                })
-                .then( (apiResponse) => {
-                    if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName){
-                        this.setAuthentification(true);
-                        console.log(apiResponse);
-                        localStorage.setItem('token', JSON.stringify(apiResponse.token));
-                        localStorage.setItem('user', JSON.stringify(apiResponse.user));
-                        this.setUser(apiResponse.user);
-                        this.$router.push('/');                                              
-                    }else{
-                        if(endPoint == 'signUp'){
-                            this.$router.push('/signIn');
-                        }                        
-                    }                     
-                })
-                .catch();
+                    .then( (apiResponse) => {
+                        if(apiResponse.token && apiResponse.user.userId && apiResponse.user.userName){
+                            this.setAuthentification(true);
+                            localStorage.setItem('token', JSON.stringify(apiResponse.token));
+                            localStorage.setItem('user', JSON.stringify(apiResponse.user));
+                            this.setUser(apiResponse.user);
+                            this.$router.push('/');                                              
+                        }
+                    })
+                    .catch(() => {
+                        alert('Invalid user or password');
+                    });
+                }else{
+                    let formData = new FormData();
+                    formData.append('image', document.getElementById('image').files[0]);
+                    formData.append('email', this.email);
+                    formData.append('userName', this.userName);
+                    formData.append('password', this.password);
+                    fetch('http://localhost:3000/api/auth/signUp', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(result => {
+                        if(result.ok){
+                            return result.json();
+                        }
+                    })
+                    .then(result => {
+                        console.log(result);
+                        this.$router.push('/signIn');
+                    })
+                    .catch(error => {
+                        alert(error);
+                    });
+                }
             }           
                 
         }
@@ -87,14 +105,14 @@
 
 <style lang="scss">    
     .form{
-        width: 400px;
+        width: 420px;
         margin: auto;
         margin-top: 40px;
         display: flex;
         flex-direction: column;
    
         div{
-            width: 70%;
+            width: 80%;
             margin: auto;
             margin-top: 20px;
             display: flex;
