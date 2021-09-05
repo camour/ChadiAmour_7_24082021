@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-     
+
+    <div class="userImage"> 
+      <img :src="user.image"/>
+      <p>{{ user.userName }}</p>
+    </div>     
     <Articles />
   
   </div>
@@ -38,6 +42,13 @@
 
 <style lang="scss">
   .home{
-    position: relative;  
+    position: relative;
+    .userImage{
+      position: absolute;
+      top: -150px;
+      right: 20px;
+      border: 2px black solid;
+      box-shadow: 3px 3px 2px black;
+    }
   }
 </style>
