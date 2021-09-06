@@ -1,8 +1,9 @@
 <template>
   <div class="home">
 
-    <div class="home__userImage"> 
-      <img :src="user.image"/>
+    <div class="home__user">
+      <div class="home__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }">
+      </div> 
       <p>{{ user.userName }}</p>
     </div>     
     <Articles />
@@ -43,12 +44,20 @@
 <style lang="scss">
   .home{
     position: relative;
-    &__userImage{
+    &__user{
       position: absolute;
       top: -150px;
-      right: 20px;
+      right: 20px; 
       border: 2px black solid;
+      border-radius: 2rem;
       box-shadow: 3px 3px 2px black;
+      padding: 10px;    
+    }
+    &__userImage{     
+      width: 150px;
+      height: 150px;
+      background-position: center;
+      background-size: cover;     
     }
   }
 </style>

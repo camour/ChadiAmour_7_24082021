@@ -29,6 +29,7 @@
 <script>
     import { mapActions } from 'vuex';
     const apiCommunication = require('../../api/communication');
+    const tools = require('../../tools/tools');
     export default{
         name: 'Form',
         props: {
@@ -54,8 +55,19 @@
         },
         methods: {
             ...mapActions(['setAuthentification', 'setUser']),
+            checkAllInputs(){
+                let ok = true;
+                for(let input of Object.keys(this.$data)){
+                    if(!tools.checkInput(input)){
+                        ok = false;
+                        console.log(input + ' invalide');
+                    }
+                }
+                return ok;
+            },       
             sendForm(){
-                if(!this.signUp){  
+                
+                if(!this.signUp && this.checkAllInputs()){  
                     apiCommunication.send('http://localhost:3000/api/auth/signIn', 'POST', {...this.$data})
                     .then(result => {
                         if(result.ok){                        
@@ -74,7 +86,7 @@
                     .catch(() => {
                         alert('Invalid user or password');
                     });
-                }else{
+                }else if(this.checkAllInputs()){
                     let formData = new FormData();
                     formData.append('image', document.getElementById('image').files[0]);
                     formData.append('email', this.email);

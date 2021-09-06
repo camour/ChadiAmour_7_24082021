@@ -198,7 +198,7 @@
                 background-position: center;
                 background-size: cover;
                 margin: auto;
-                box-shadow: 2px 2px 2px black;
+                box-shadow: 4px 4px 2px rgb(19, 18, 18);
                 border-radius: 1em;
             }
         }
@@ -259,7 +259,9 @@
         margin: auto;
         margin-top: 30px;
         margin-bottom: 30px;
+        padding: 3px;
         font-size: 0.9;
+        font-weight: bold;
         cursor: pointer;
         &:hover{
             transform: scale(1.1);
