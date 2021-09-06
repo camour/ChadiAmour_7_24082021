@@ -28,7 +28,7 @@
       ...mapActions(['fillArticlesArray']),
     },
     beforeMount(){
-      apiCommunication.send(process.env.API_URL + 'articles')
+      apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/articles')
       .then(result => {
         if(result.ok){
           return result.json();

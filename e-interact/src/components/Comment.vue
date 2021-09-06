@@ -20,6 +20,8 @@
 <script>
     import { mapState, mapActions } from 'vuex';
     const apiCommunication = require('../api/communication');
+    require('dotenv').config();
+
     export default{
         name: 'Comment',
         props: {
@@ -42,7 +44,7 @@
         methods: {   
             ...mapActions(['saveCommentLocally', 'deleteCommentLocally']),         
             saveComment(){
-                apiCommunication.send('http://localhost:3000/api/comments/' + this.comment.commentId, 'PUT', {userId: this.user.userId, 
+                apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/comments/' + this.comment.commentId, 'PUT', {userId: this.user.userId, 
                 comment: {commentContent: this.comment.commentContent, commentArticleId: this.articlesArray[this.articleIndex].articleId}})
                 .then(() => {
                     this.saveCommentLocally({articleIndex: this.articleIndex, commentIndex: this.commentIndex, comment: this.comment});
@@ -50,7 +52,7 @@
                 .catch();
             },
             deleteComment(){
-                apiCommunication.send('http://localhost:3000/api/comments/' + this.comment.commentId, 'DELETE', 
+                apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/comments/' + this.comment.commentId, 'DELETE', 
                 { userId: this.user.userId, comment: {commentArticleId: this.articlesArray[this.articleIndex].articleId}})
                 .then(() => {
                     this.deleteCommentLocally({articleIndex: this.articleIndex, commentIndex: this.commentIndex});

@@ -22,6 +22,8 @@
     import { mapState, mapActions } from 'vuex';
     import Article from './Article.vue';
     const apiCommunication = require('../api/communication');
+    require('dotenv').config();
+
     export default{
         name: 'Articles',
         components: {
@@ -51,7 +53,7 @@
                         articleContent: this.newArticle.content,
                         articlePublishingDate: new Date().toISOString().slice(0,19).replace('T', ' '),
                     };
-                apiCommunication.send('http://localhost:3000/api/articles', 'POST', { userId: this.user.userId, newArticleToAdd})
+                apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/articles', 'POST', { userId: this.user.userId, newArticleToAdd})
                 .then(result => {
                     if(result.ok){
                         return result.json();
