@@ -60,15 +60,14 @@
                 for(let input of Object.keys(this.$data)){
                     if(!tools.checkInput(input)){
                         ok = false;
-                        console.log(input + ' invalide');
+                        alert('Invalid syntax for ' + input);
                     }
                 }
                 return ok;
-            },       
-            sendForm(){
-                
+            },      
+            sendForm(){                
                 if(!this.signUp && this.checkAllInputs()){  
-                    apiCommunication.send('http://localhost:3000/api/auth/signIn', 'POST', {...this.$data})
+                    apiCommunication.send('http://localhost:3000/api/auth/signIn', 'POST', {...tools.cleanText(this.$data)})
                     .then(result => {
                         if(result.ok){                        
                             return result.json();                          
@@ -86,12 +85,12 @@
                     .catch(() => {
                         alert('Invalid user or password');
                     });
-                }else if(this.checkAllInputs()){
+                }else if(this.signUp && this.checkAllInputs()){    
                     let formData = new FormData();
                     formData.append('image', document.getElementById('image').files[0]);
-                    formData.append('email', this.email);
-                    formData.append('userName', this.userName);
-                    formData.append('password', this.password);
+                    formData.append('email', this.email.replace(/<\/?[^>]+(>|$)/g, ""));
+                    formData.append('userName', this.userName.replace(/<\/?[^>]+(>|$)/g, ""));
+                    formData.append('password', this.password.replace(/<\/?[^>]+(>|$)/g, ""));                   
                     fetch('http://localhost:3000/api/auth/signUp', {
                         method: 'POST',
                         body: formData
