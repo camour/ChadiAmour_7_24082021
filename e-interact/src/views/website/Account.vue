@@ -14,7 +14,6 @@
 <script>
     import { mapState } from 'vuex';
     const apiCommunication = require('../../api/communication');
-    require('dotenv').config();
 
     export default{
         name: 'Account',
@@ -32,7 +31,7 @@
             }
         },
         beforeMount(){
-            apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/auth/user/' + this.user.userId)
+            apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.API_PORT + '/api/auth/user/' + this.user.userId)
             .then(result => {
                 if(result.ok){
                     return result.json();

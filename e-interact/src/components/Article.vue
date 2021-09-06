@@ -38,7 +38,7 @@
     import { mapState, mapActions } from 'vuex';
     import Comment from './Comment.vue';
     const apiCommunication = require('../api/communication');
-    require('dotenv').config();
+    
     export default{
         name: 'Article',
         components: {
@@ -75,7 +75,7 @@
                 document.getElementById('deleteButton'+this.article.articleId).setAttribute('disabled', true);
             },
             saveArticle(){
-                apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/articles/' + this.article.articleId, 'PUT',{
+                apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/articles/' + this.article.articleId, 'PUT',{
                             userId: this.user.userId,
                             article: { 
                                 articleSubject: this.article.articleSubject,
@@ -93,7 +93,7 @@
                 });
             },
             deleteArticle(){
-                apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/articles/' + this.article.articleId, 'DELETE',{ userId: this.user.userId})
+                apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/articles/' + this.article.articleId, 'DELETE',{ userId: this.user.userId})
                 .then(result => {
                     if(result.ok){
                         return result.json();
@@ -113,7 +113,7 @@
                     commentContent: this.newCommentContent,
                     commentPublishingDate: new Date().toISOString().slice(0,19).replace('T', ' ')
                 };
-                apiCommunication.send( 'http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/comments/' + this.article.articleId, 'POST', { userId: this.user.userId, newCommentToAdd})
+                apiCommunication.send( 'http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/comments/' + this.article.articleId, 'POST', { userId: this.user.userId, newCommentToAdd})
                 .then(result => {
                     if(result.ok){
                         return result.json();

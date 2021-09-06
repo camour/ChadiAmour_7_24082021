@@ -15,7 +15,7 @@
   import { mapState, mapActions } from 'vuex';
   import Articles from '../../components/Articles.vue';
   const apiCommunication = require('../../api/communication');
-  require('dotenv').config();
+  
   export default {
     name: 'Home',
     components: {
@@ -28,7 +28,7 @@
       ...mapActions(['fillArticlesArray']),
     },
     beforeMount(){
-      apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/articles')
+      apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/articles')
       .then(result => {
         if(result.ok){
           return result.json();

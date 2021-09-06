@@ -30,8 +30,7 @@
     import { mapActions } from 'vuex';
     const apiCommunication = require('../../api/communication');
     const tools = require('../../tools/tools');
-    require('dotenv').config();
-
+    
     export default{
         name: 'Form',
         props: {
@@ -69,7 +68,8 @@
             },      
             sendForm(){                
                 if(!this.signUp && this.checkAllInputs()){  
-                    apiCommunication.send('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/auth/signIn', 'POST', {...tools.cleanText(this.$data)})
+                    console.log('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signIn');
+                    apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signIn', 'POST', {...tools.cleanText(this.$data)})
                     .then(result => {
                         if(result.ok){                        
                             return result.json();                          
@@ -93,7 +93,7 @@
                     formData.append('email', this.email.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('userName', this.userName.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('password', this.password.replace(/<\/?[^>]+(>|$)/g, ""));                   
-                    fetch('http://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/auth/signUp', {
+                    fetch('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signUp', {
                         method: 'POST',
                         body: formData
                     })
