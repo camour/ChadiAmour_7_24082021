@@ -80,7 +80,7 @@
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
     }
     .articles{
-        width: 650px;
+        width: 800px;
         margin: auto;
         position: relative; 
     }

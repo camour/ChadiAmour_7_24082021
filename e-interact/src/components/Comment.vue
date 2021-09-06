@@ -83,14 +83,14 @@
         display: flex;
         align-items: center;
         font-size: 0.9em;
-        width: 80%;
+        width: 78%;
         padding: 10px;
         text-align: center;
         border-left: 2px rgb(221, 144, 144) solid;
         overflow: hidden;        
     }
     .commentUserBlock{
-        width: 20%;
+        width: 22%;
     }
 
     .commentUser{

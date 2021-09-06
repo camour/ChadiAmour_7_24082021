@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div class="userImage"> 
+    <div class="home__userImage"> 
       <img :src="user.image"/>
       <p>{{ user.userName }}</p>
     </div>     
@@ -43,7 +43,7 @@
 <style lang="scss">
   .home{
     position: relative;
-    .userImage{
+    &__userImage{
       position: absolute;
       top: -150px;
       right: 20px;

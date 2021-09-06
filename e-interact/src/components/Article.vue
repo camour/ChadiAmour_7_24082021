@@ -4,6 +4,7 @@
         <div class="article">
             <div class="article__user">
                 <p class="userName">{{ article.articleUserName }}</p>
+                <p class="userImage" v-bind:style="{ backgroundImage: 'url('+this.article.articleUserImage+')' }"></p>
                 <p>{{ displayRearangedDate }}</p>
             </div>
             <div class="article__post">
@@ -60,9 +61,9 @@
             ...mapState(['user']),
             displayRearangedDate(){
                 return this.article.articlePublishingDate.slice(0,19).replace('T', ' ');
-            }
+            }            
         },
-        methods: {            
+        methods: {           
             ...mapActions(['saveArticleLocally', 'deleteArticleLocally', 'addNewComment']),
             enableButtons(){
                 document.getElementById('saveButton'+this.article.articleId).removeAttribute('disabled');
@@ -127,7 +128,7 @@
             cancelNewComment(){
                 this.showNewCommentTextArea = false;
             },
-        }     
+        }
     }
 
 </script>
@@ -159,7 +160,7 @@
         padding: 0px;         
 
         &__post{          
-            width: 80%;
+            width: 78%;
             .articleSubject{
                 text-align: center;
                 width: 200px;
@@ -187,10 +188,19 @@
             }
         }
         &__user{
-            width: 20%;
+            width: 22%;
             border-radius: 1rem 0 0 1rem;
             box-shadow: 2px 2px 3px rgb(207, 106, 106);
             background: rgb(243, 239, 239);
+            .userImage{
+                width: 150px;
+                height: 150px;
+                background-position: center;
+                background-size: cover;
+                margin: auto;
+                box-shadow: 2px 2px 2px black;
+                border-radius: 1em;
+            }
         }
         .articleSubjectUser:hover:not(:focus), .articleContentUser:hover:not(:focus){
             cursor: pointer;
@@ -247,6 +257,7 @@
         position: relative;
         width: 130px;
         margin: auto;
+        margin-top: 30px;
         margin-bottom: 30px;
         font-size: 0.9;
         cursor: pointer;
