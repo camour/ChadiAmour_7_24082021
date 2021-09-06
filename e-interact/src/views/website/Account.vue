@@ -6,7 +6,7 @@
             <p> subscribing date : {{ displayRearangedDate }}</p>
              <p> posts : {{ postsNumber }}</p>
         </div>
-        <div class="account__userImage"><img :src=user.image alt="profile image"/> </div>
+        <div class="account__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }"></div>
         
     </div>
 </template>
@@ -72,7 +72,10 @@
     .account__userImage{
         border: 2px black solid;
         box-shadow: 3px 3px 2px black;
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 1em;
     }
 </style>

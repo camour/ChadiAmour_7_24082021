@@ -15,6 +15,7 @@
   import { mapState, mapActions } from 'vuex';
   import Articles from '../../components/Articles.vue';
   const apiCommunication = require('../../api/communication');
+  require('dotenv').config();
   export default {
     name: 'Home',
     components: {
@@ -27,7 +28,7 @@
       ...mapActions(['fillArticlesArray']),
     },
     beforeMount(){
-      apiCommunication.send('http://localhost:3000/api/articles')
+      apiCommunication.send(process.env.API_URL + 'articles')
       .then(result => {
         if(result.ok){
           return result.json();
@@ -48,14 +49,15 @@
       position: absolute;
       top: -150px;
       right: 20px; 
-      border: 2px black solid;
-      border-radius: 2rem;
+      border-radius: 1em;
       box-shadow: 3px 3px 2px black;
-      padding: 10px;    
+      padding: 5px;
     }
     &__userImage{     
       width: 150px;
       height: 150px;
+      border-radius: 1em;
+      box-shadow: 3px 3px 2px black;
       background-position: center;
       background-size: cover;     
     }

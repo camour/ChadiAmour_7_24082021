@@ -59,6 +59,7 @@
                 })
                 .then(result => {
                     newArticleToAdd.articleId = result.articleId;
+                    newArticleToAdd.articleUserImage = this.user.image;
                     newArticleToAdd.comments = new Array();
                     // if and only if API return success, we can add userName to new Article object
                     // so userName is not transmitted through network 
