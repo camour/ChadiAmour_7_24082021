@@ -1,11 +1,12 @@
 <template>
     <div class="account">
-        <div class="userInfos">
+        <div class="account__userInfos">
             <p> user name : {{ user.userName }}</p>
             <p> email : {{ email }}</p>
             <p> subscribing date : {{ displayRearangedDate }}</p>
+             <p> posts : {{ postsNumber }}</p>
         </div>
-        <div class="userImage"><img :src=user.image alt="profile image"/> </div>
+        <div class="account__userImage"><img :src=user.image alt="profile image"/> </div>
         
     </div>
 </template>
@@ -19,7 +20,8 @@
         data(){
             return{
                 email: '',
-                subscribingDate: ''
+                subscribingDate: '',
+                postsNumber: 0
             }
         },
         computed: {
@@ -39,6 +41,7 @@
                 if(apiResponse.user.email && apiResponse.user.subscribingDate){
                     this.email = apiResponse.user.email;
                     this.subscribingDate = apiResponse.user.subscribingDate;
+                    this.postsNumber = apiResponse.user.postsNumber;
                 }
             })
             .catch(error => {
@@ -59,8 +62,17 @@
             text-align: left;
         }
     }
-    .userImage{
+    .account__userInfos{
+        background-color: rgb(243, 224, 224);
+        border: 0px;
+        border-radius: 1em;
+        padding: 20px;
+        box-shadow: 3px 3px 2px black;
+    }
+    .account__userImage{
         border: 2px black solid;
         box-shadow: 3px 3px 2px black;
+        width: 250px;
+        height: 250px;
     }
 </style>
