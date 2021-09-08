@@ -28,13 +28,15 @@
       ...mapActions(['fillArticlesArray']),
     },
     beforeMount(){
+      //get all the articles fron server so we can display them
       apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/articles')
       .then(result => {
         if(result.ok){
           return result.json();
         }
       })
-      .then(objectResult => {        
+      .then(objectResult => {  
+        // we store all the articles in our Vuex store      
         this.fillArticlesArray(objectResult.articlesArray);  
       })
       .catch();

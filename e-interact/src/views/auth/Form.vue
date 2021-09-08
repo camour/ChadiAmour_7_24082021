@@ -56,6 +56,7 @@
         },
         methods: {
             ...mapActions(['setAuthentification', 'setUser']),
+            //checks wheter an input is validate using regex
             checkAllInputs(){
                 let ok = true;
                 for(let input of Object.keys(this.$data)){
@@ -66,7 +67,9 @@
                 }
                 return ok;
             },      
-            sendForm(){                
+            sendForm(){
+                //either we are signing in or we are signing up. Signing up requires a form data, which
+                // implies a http post body a little bit different from regular http body                
                 if(!this.signUp && this.checkAllInputs()){  
                     console.log('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signIn');
                     apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signIn', 'POST', {...tools.cleanText(this.$data)})
@@ -103,6 +106,7 @@
                         }
                     })
                     .then(() => {
+                        //once signup process is ok, we redirect user to sign in page so he can log in
                         this.$router.push('/signIn');
                     })
                     .catch(error => {

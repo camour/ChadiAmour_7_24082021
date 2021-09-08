@@ -28,11 +28,13 @@
         },
         computed: {
             ...mapState(['user']),
+            //JS has buggy process when it comes to dates, so we make it up by this using the function below
             displayRearangedDate(){
                 return this.subscribingDate.slice(0,19).replace('T', ' ');
             }
         },
         beforeMount(){
+            // we retry user information to display it
             apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/user/' + this.user.userId)
             .then(result => {
                 if(result.ok){
@@ -60,6 +62,7 @@
                     }
                 })
                 .then(() => {
+                    // once server successfully deleted user, we can clear local storage especially the token
                     localStorage.clear();
                     this.setAuthentification(false);
                     this.$router.push('/signIn');      
