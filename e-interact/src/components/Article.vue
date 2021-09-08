@@ -107,8 +107,8 @@
             enableNewCommentTextArea(){
                 this.showNewCommentTextArea = true;
             },
-            saveNewComment(){
-                this.showNewCommentTextArea = false;
+            saveNewComment(){                
+                this.showNewCommentTextArea = false;                
                 let newCommentToAdd = {
                     commentContent: this.newCommentContent,
                     commentPublishingDate: new Date().toISOString().slice(0,19).replace('T', ' ')
@@ -123,6 +123,7 @@
                     newCommentToAdd.commentUserName = this.user.userName;
                     newCommentToAdd.commentId = result.commentId;
                     this.addNewComment({articleIndex: this.articleIndex, newCommentToAdd});
+                    this.newCommentContent='';
                 })
                 .catch();
             },

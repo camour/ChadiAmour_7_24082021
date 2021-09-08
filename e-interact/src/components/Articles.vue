@@ -67,6 +67,8 @@
                     //(to prevent from MAN IN THE MIDDLE ATTACK)
                     newArticleToAdd.articleUserName = this.user.userName;
                     this.addNewArticle(newArticleToAdd);
+                    this.newArticle.subject = '';
+                    this.newArticle.content = '';
                 });
             },
             cancelNewArticle(){

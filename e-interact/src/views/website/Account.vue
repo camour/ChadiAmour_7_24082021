@@ -1,18 +1,20 @@
 <template>
-    <div class="account">
-        <div class="account__userInfos">
-            <p> user name : {{ user.userName }}</p>
-            <p> email : {{ email }}</p>
-            <p> subscribing date : {{ displayRearangedDate }}</p>
-             <p> posts : {{ postsNumber }}</p>
+    <div>
+        <div class="account">
+            <div class="account__userInfos">
+                <p> user name : {{ user.userName }}</p>
+                <p> email : {{ email }}</p>
+                <p> subscribing date : {{ displayRearangedDate }}</p>
+                <p> posts : {{ postsNumber }}</p>
+            </div>
+            <div class="account__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }"></div>        
         </div>
-        <div class="account__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }"></div>
-        
+        <button type="submit" class="deleteAccount" @click="deleteAccount">Delete Account</button>
     </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     const apiCommunication = require('../../api/communication');
 
     export default{
@@ -31,7 +33,7 @@
             }
         },
         beforeMount(){
-            apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.API_PORT + '/api/auth/user/' + this.user.userId)
+            apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/user/' + this.user.userId)
             .then(result => {
                 if(result.ok){
                     return result.json();
@@ -47,11 +49,32 @@
             .catch(error => {
                 alert(error);
             });
+        },
+        methods: {
+            ...mapActions(['setAuthentification']),
+            deleteAccount(){                
+                apiCommunication.send('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/user/' + this.user.userId, 'DELETE', null)
+                .then(result => {
+                    if(result.ok){
+                        return result.json();
+                    }
+                })
+                .then(() => {
+                    localStorage.clear();
+                    this.setAuthentification(false);
+                    this.$router.push('/signIn');      
+                })
+                .catch();                      
+            }
         }
     }
 </script>
 
 <style lang="scss">
+    @font-face{
+        font-family: 'KG';
+        src: url('../../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
+    }
     .account{
         width: 70%;
         margin: auto;
@@ -77,5 +100,23 @@
         background-position: center;
         background-size: cover;
         border-radius: 1em;
+    }
+    .deleteAccount{
+        width: 200px;
+        margin: auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        border: 1px black solid;
+        border-radius: 1em;
+        box-shadow: 3px 3px 2px black;
+        background-color: red;
+        font-family: 'KG';
+        font-size: 1.2em;
+        transform: scale(1.1);
+        cursor: pointer;
+        transition: all 1s;
+        &:hover{
+            transform: scale(1.2);
+        }
     }
 </style>
