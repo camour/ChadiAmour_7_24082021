@@ -20,9 +20,9 @@
                 <input type="file" name="image" id="image" title=" "/>
             </div>
 
-            <div>
-                <button type="submit" id="submitButton" @click="sendForm">submit</button>
-            </div>           
+
+            <button type="submit" id="submitButton" @click="sendForm">submit</button>
+          
     </div>
 </template>
 
@@ -134,10 +134,23 @@
             display: flex;
             justify-content: space-between;            
         }
+
         button{
-            width: 110px;
-            margin: auto;
-            margin-top: 20px;
+            align-self: center;
+            width: 120px;
+            margin-top: 50px;
+            border: 1px rgb(223, 144, 196) solid;
+            border-radius: 1rem;
+            background-color: #ecbbbb;
+            box-shadow: 1px 1px 3px rgb(223, 144, 196);
+            font-weight: bolder;
+            padding: 5px;
+            margin-left: 6px;
+            cursor: pointer;
+            transition: all 1s;
+            &:hover{
+                transform: scale(1.1);
+            }
         }
 
     }
