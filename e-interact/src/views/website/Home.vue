@@ -51,7 +51,6 @@
       position: absolute;
       top: -150px;
       right: 20px; 
-      border-radius: 1em;
       box-shadow: 3px 3px 2px black;
       padding: 5px;
     }

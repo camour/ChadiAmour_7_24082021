@@ -17,7 +17,7 @@
     width: 300px;
     margin: auto;
     margin-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     transform: scale(2.2);
     .jumbo__logo{
         width: 100px;
