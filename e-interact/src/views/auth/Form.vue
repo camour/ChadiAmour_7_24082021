@@ -17,7 +17,7 @@
 
             <div v-if="signUp">
                 <label for="image">profile image</label>
-                <input type="file" name="image" id="image" title=" "/>
+                <input type="file" name="image" id="image" accept="image/png, image/jpeg"/>
             </div>
 
 
@@ -65,6 +65,16 @@
                         alert('Invalid syntax for ' + input);
                     }
                 }
+                if((document.getElementById('image').value === '') || (document.getElementById('image').value === ' ')){
+                    ok = false;
+                    alert('Please pick a profile image');
+                }
+                if((document.getElementById('image').files[0].type != 'image/png') 
+                    && (document.getElementById('image').files[0].type != 'image/jpeg') 
+                    && (document.getElementById('image').files[0].type != 'image/jpg')){
+                    ok = false;
+                    alert('Only jpeg or png file extensions are accepted');
+                }
                 return ok;
             },      
             sendForm(){
@@ -92,11 +102,12 @@
                     });
                 }else if(this.signUp && this.checkAllInputs()){    
                     let formData = new FormData();
+                    console.log(document.getElementById('image').files);
                     formData.append('image', document.getElementById('image').files[0]);
                     formData.append('email', this.email.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('userName', this.userName.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('password', this.password.replace(/<\/?[^>]+(>|$)/g, ""));                   
-                    fetch('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signUp', {
+                    /*fetch('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signUp', {
                         method: 'POST',
                         body: formData
                     })
@@ -111,7 +122,7 @@
                     })
                     .catch(error => {
                         alert(error);
-                    });
+                    });*/
                 }
             }           
                 
