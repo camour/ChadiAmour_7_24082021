@@ -102,12 +102,11 @@
                     });
                 }else if(this.signUp && this.checkAllInputs()){    
                     let formData = new FormData();
-                    console.log(document.getElementById('image').files);
                     formData.append('image', document.getElementById('image').files[0]);
                     formData.append('email', this.email.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('userName', this.userName.replace(/<\/?[^>]+(>|$)/g, ""));
                     formData.append('password', this.password.replace(/<\/?[^>]+(>|$)/g, ""));                   
-                    /*fetch('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signUp', {
+                    fetch('http://' + process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT + '/api/auth/signUp', {
                         method: 'POST',
                         body: formData
                     })
@@ -122,7 +121,7 @@
                     })
                     .catch(error => {
                         alert(error);
-                    });*/
+                    });
                 }
             }           
                 
