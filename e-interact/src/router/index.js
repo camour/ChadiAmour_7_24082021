@@ -20,6 +20,11 @@ const routes = [
     component: SignUp
   },
   {
+    path: '/logOut',
+    name: 'LogOut',
+    component: LogOut
+  },
+  {
     path: '/',
     name: 'Home',   
     component: Home
@@ -31,12 +36,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Account
-  },
-  {
-    path: '/logOut',
-    name: 'LogOut',
-    component: LogOut
-  }
+  }  
 ]
 
 let router = new VueRouter({

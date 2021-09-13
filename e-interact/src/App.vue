@@ -2,18 +2,20 @@
   <div id="app">   
    
     <Header />
-    <router-view />
-    
+    <Jumbo />
+    <router-view />     
     
   </div>
 </template>
 
 <script>
   import Header from './views/Header.vue';
+  import Jumbo from './views/Jumbo.vue';
   export default{
     name: 'App',
     components: {
-      Header
+      Header,
+      Jumbo
     },
   }
 </script>

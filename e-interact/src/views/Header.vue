@@ -33,7 +33,7 @@
         width: 600px;
         margin: auto;
         margin-top: 20px;
-        margin-bottom: 40px;
+        margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
