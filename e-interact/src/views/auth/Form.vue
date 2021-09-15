@@ -65,11 +65,11 @@
                         alert('Invalid syntax for ' + input);
                     }
                 }
-                if((document.getElementById('image').value === '') || (document.getElementById('image').value === ' ')){
+                if(this.signUp && ((document.getElementById('image').value === '') || (document.getElementById('image').value === ' '))){
                     ok = false;
                     alert('Please pick a profile image');
                 }
-                if((document.getElementById('image').files[0].type != 'image/png') 
+                if(this.signUp && ((document.getElementById('image').files[0].type != 'image/png')) 
                     && (document.getElementById('image').files[0].type != 'image/jpeg') 
                     && (document.getElementById('image').files[0].type != 'image/jpg')){
                     ok = false;
