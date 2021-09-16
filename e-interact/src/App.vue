@@ -23,7 +23,7 @@
 </script>
 
 <style lang="scss">
-  $mobile-breakpoint: 500px;
+  $mobile-breakpoint: 880px;
   @font-face{
     font-family: 'Bertha';
     src: url('../public/polices/BerthaMelanie.ttf') format('truetype');

@@ -29,7 +29,7 @@
         transform: scale(2);
     }
     h1{
-        width: 350px;
+        width: 99%;
         margin: auto;
     }
 }

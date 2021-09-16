@@ -130,7 +130,7 @@
 </script>
 
 <style lang="scss"> 
-    $mobile-breakpoint: 700px;    
+    $mobile-breakpoint: 880px;    
     .form{
         width: 420px;
         margin: auto;

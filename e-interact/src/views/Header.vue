@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss">
-    $mobile-breakpoint: 700px;    
+    $mobile-breakpoint: 880px;    
     .header{
         width: 600px;
         display: flex;
