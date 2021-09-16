@@ -5,8 +5,8 @@
       <div class="home__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }">
       </div> 
       <p class="homme__userName">{{ user.userName }}</p>
-    </div>     
-    <Articles />
+    </div>   
+      <Articles />
   
   </div>
 </template>

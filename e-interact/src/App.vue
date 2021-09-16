@@ -3,7 +3,9 @@
    
     <Header />
     <Jumbo />
-    <router-view />     
+    <main>
+      <router-view />
+    </main>    
     
   </div>
 </template>
@@ -37,5 +39,11 @@
       width: 99%;
       margin: auto;
     }    
+  }
+  main{
+    @media (max-width: $mobile-breakpoint) {
+        width: 99%;        
+    }
+    margin: auto;
   }
 </style>

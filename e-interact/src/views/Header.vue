@@ -1,5 +1,5 @@
 <template>
-        <div class="header">
+        <header class="header">
                         
             <router-link to="/" class="header__brand">
                 <div class="header__company">Groupomania</div>
@@ -12,7 +12,7 @@
                 <router-link v-show="authentification" to="/account">Account</router-link>
                 <router-link v-show="authentification" to="/logOut">Log Out</router-link>               
             </div>
-        </div>
+        </header>
     
 </template>
 

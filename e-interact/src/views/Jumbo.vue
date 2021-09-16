@@ -15,11 +15,10 @@
 <style lang="scss">
 .jumbo{
     position: relative;
-    width: 300px;
+    width: 350px;
     margin: auto;
     margin-top: 0px;
     margin-bottom: 10px;
-    transform: scale(2);
     .jumbo__logo{
         width: 100px;
         height: 100px;
@@ -27,11 +26,11 @@
         background-image: url('../../public/logo/eInteract.png');
         background-position: center;
         background-size: cover;
+        transform: scale(2);
     }
     h1{
-        width: 190px;
+        width: 350px;
         margin: auto;
-        font-size: 0.8em;
     }
 }
 </style>
