@@ -55,6 +55,7 @@
       @media (max-width: $mobile-breakpoint){
         width: 200px;
         margin: auto;
+        margin-top: 100px;
       }
       @media (min-width: $mobile-breakpoint){
         position: absolute;

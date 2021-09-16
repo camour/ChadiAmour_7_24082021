@@ -2,8 +2,10 @@
     <div class="articles">
         <button id="newArticle" v-show="!showTextArea" @click="enableTextArea">+ new article</button>
         <div class="newArticleBlock" v-show="showTextArea">
-            <input type="text" class="newArticleSubject" v-model="newArticle.subject" placeholder="article subject"/>
-            <textarea class="newArticleContent" v-model="newArticle.content" placeholder="article body"></textarea>
+            <label for="newArticleSubject">subject</label>
+            <input type="text" id="newArticleSubject" class="newArticleSubject" v-model="newArticle.subject" placeholder="article subject"/>
+            <label for="newArticleContent">content</label>
+            <textarea id="newArticleContent" class="newArticleContent" v-model="newArticle.content" placeholder="article body"></textarea>
             <div class="newArticleButtonsBlock">   
                 <button @click="saveNewArticle">save</button>
                 <button @click="cancelNewArticle">cancel</button>
@@ -87,9 +89,9 @@
     .articles{
         width: 800px;
         margin: auto;
+        margin-top: 100px;
         @media (max-width: $mobile-breakpoint){
             width: 99%;
-            margin-top: 40px;    
         }    
         position: relative; 
     }

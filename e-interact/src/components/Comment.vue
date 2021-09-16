@@ -4,9 +4,10 @@
             <div class="commentUser">{{ comment.commentUserName }}</div>
             <p class="commentDate">{{ displayRearangedDate }}</p>
         </div>
-        <div class="comment">          
+        <div class="comment"> 
+            <label v-show="this.user.userName==comment.commentUserName" :for="'commentContent' + comment.commentId">comment</label>      
             <div v-show="this.user.userName!=comment.commentUserName" class="commentContent">{{ comment.commentContent }}</div>
-            <textarea v-show="this.user.userName==comment.commentUserName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>           
+            <textarea v-show="this.user.userName==comment.commentUserName" class="commentContent commentContentUser" :id="'commentContent' + comment.commentId" v-model="comment.commentContent"></textarea>
             <div v-show="this.user.userName==comment.commentUserName" class="commentButtons">                
                 <div class="buttonsBlock" :id="'buttonsBlock' + comment.commentId">                    
                     <button class="button" :id="'saveButton' + comment.commentId" @click="saveComment">save</button>
@@ -134,9 +135,12 @@
             margin-bottom: 3px;
             cursor: pointer;
         }        
-    }  
+    } 
+    label{
+        margin-right: 10px;
+    } 
     .commentContent{
-        width:70%;
+        width:65%;
         font-family: 'KG';
         border: 1px #bdb2b2 solid;
         border-radius: 1em;

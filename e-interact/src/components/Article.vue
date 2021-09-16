@@ -8,16 +8,18 @@
                 <p>{{ displayRearangedDate }}</p>
             </div>
             <div class="article__post">
-                <h3 v-if="article.articleUserName != user.userName" class="articleSubject">{{ article.articleSubject }}</h3>
+                <label v-if="article.articleUserName == user.userName" :for="'articleSubject' + article.articleId">subject</label>
+                <h2 v-if="article.articleUserName != user.userName" class="articleSubject">{{ article.articleSubject }}</h2>
                 <input v-if="article.articleUserName == user.userName" type="text" :id="'articleSubject' + article.articleId" class="articleSubject articleSubjectUser" v-model="article.articleSubject" @focus="enableButtons"/>
                 <p v-if="article.articleUserName!= user.userName" class="articleContent">{{ article.articleContent }}</p>
-                <textarea v-if="article.articleUserName == user.userName" class="articleContent articleContentUser" v-model="article.articleContent" @focus="enableButtons"></textarea>                    
+                <textarea v-if="article.articleUserName == user.userName" :id="'articleContent' + article.articleId" class="articleContent articleContentUser" v-model="article.articleContent" @focus="enableButtons"></textarea>                    
                 <div v-if="user.userName == article.articleUserName" class="articleButtonsBlock" :id="'articleButtonsBlock' + article.articleId">
                     <div class="articleButtons" :id="'articleButtons' + article.articleId">                   
                         <button class="button" :id="'saveButton' + article.articleId" disabled @click="saveArticle">save</button>
                         <button class="button" :id="'deleteButton' + article.articleId" disabled @click="deleteArticle">delete</button>
                     </div>
-                </div>   
+                </div>
+                <br/><label v-if="article.articleUserName == user.userName" :for="'articleContent' + article.articleId">content</label>   
             </div>                     
         </div>
         <Comment v-for="(comment, commentIndex) in article.comments" :key="commentIndex" :comment="comment" :commentIndex="commentIndex" :articleIndex="articleIndex"/>

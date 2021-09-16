@@ -83,6 +83,7 @@
         width: 70%;
         margin: auto;
         display: flex;
+        margin-top: 100px;
         justify-content: space-around;
         @media (max-width: $mobile-breakpoint){
             flex-direction: column-reverse;

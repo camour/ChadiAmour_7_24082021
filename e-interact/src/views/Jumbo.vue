@@ -2,6 +2,7 @@
     <div class="jumbo">
         <div class= "jumbo__logo">
         </div>
+        <h1>The application for interaction</h1>
     </div>
 </template>
 
@@ -18,7 +19,7 @@
     margin: auto;
     margin-top: 0px;
     margin-bottom: 10px;
-    transform: scale(2.2);
+    transform: scale(2);
     .jumbo__logo{
         width: 100px;
         height: 100px;
@@ -26,6 +27,11 @@
         background-image: url('../../public/logo/eInteract.png');
         background-position: center;
         background-size: cover;
+    }
+    h1{
+        width: 85%;
+        margin: auto;
+        font-size: 0.8em;
     }
 }
 </style>

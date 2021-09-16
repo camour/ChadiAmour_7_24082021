@@ -74,14 +74,17 @@
             margin: auto;
         }         
         align-items: center;
+        .router-link-exact-active{
+            color: #c01010;
+        }
         a{
             font-weight: bold;
             color: #2c3e50;
             display: block;
-
+            text-decoration: none;
             &:hover{
                 font-weight: bold;
-                color: #42b983;              
+                text-decoration: underline;            
             }
         }
     }
