@@ -63,6 +63,7 @@
 </script>
 
 <style lang="scss">
+    $mobile-breakpoint: 500px;
     @font-face{
         font-family: 'KG';
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
@@ -91,7 +92,7 @@
         overflow: hidden;        
     }
     .commentUserBlock{
-        width: 22%;
+        width: 22%;        
     }
 
     .commentUser{
@@ -100,21 +101,26 @@
         margin-top: 8px;
         border: 1px rgb(234, 228, 245) solid;
     }
-    .commentDate{
+    .commentDate{               
         font-size: 0.8em;
+        width: 95%;
+        margin: auto;
     }
     .commentButtons{
         position: relative;
         width: 25%;
-        height: 35px;        
+        height: 50px;        
         
         .buttonsBlock{           
             position: absolute;
             display: flex;
+            justify-content: center;
+            @media (max-width: $mobile-breakpoint){
+                flex-direction: column;
+            }
             top: 0;
             right: 0;
             transform: translateX(130%);
-            justify-content: center;
             transition: all 1s;
         }
         .button{            
@@ -125,6 +131,7 @@
             font-weight: bolder;
             padding: 5px;
             margin-left: 6px;
+            margin-bottom: 3px;
             cursor: pointer;
         }        
     }  

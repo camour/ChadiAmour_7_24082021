@@ -4,7 +4,7 @@
     <div class="home__user">
       <div class="home__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }">
       </div> 
-      <p>{{ user.userName }}</p>
+      <p class="homme__userName">{{ user.userName }}</p>
     </div>     
     <Articles />
   
@@ -45,22 +45,39 @@
 </script>
 
 <style lang="scss">
+  $mobile-breakpoint: 500px;
   .home{
     position: relative;
     &__user{
-      position: absolute;
-      top: -150px;
-      right: 20px; 
+      position: relative;      
       box-shadow: 3px 3px 2px black;
       padding: 5px;
+      @media (max-width: $mobile-breakpoint){
+        width: 200px;
+        margin: auto;
+      }
+      @media (min-width: $mobile-breakpoint){
+        position: absolute;
+        top: -150px;
+        right: 20px; 
+      }
     }
     &__userImage{     
       width: 150px;
       height: 150px;
+      @media (max-width: $mobile-breakpoint){
+        margin: auto;
+      }      
       border-radius: 1em;
       box-shadow: 3px 3px 2px black;
       background-position: center;
-      background-size: cover;     
+      background-size: cover;      
+    }
+    &__userName{
+        width: 150px;
+        margin:auto;
+        margin-top: 10px;
+
     }
   }
 </style>

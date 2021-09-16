@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div class="header">
                         
             <router-link to="/" class="header__brand">
@@ -14,7 +13,6 @@
                 <router-link v-show="authentification" to="/logOut">Log Out</router-link>               
             </div>
         </div>
-    </div>
     
 </template>
 
@@ -29,25 +27,34 @@
 </script>
 
 <style lang="scss">
+    $mobile-breakpoint: 500px;    
     .header{
         width: 600px;
+        display: flex;
+        @media (max-width: $mobile-breakpoint) {
+            width: 99%;
+            flex-direction: column;;
+        }
         margin: auto;
         margin-top: 20px;
-        margin-bottom: 10px;
-        display: flex;
+        margin-bottom: 10px;        
         justify-content: space-between;
         align-items: center;
         
         &__brand{
             width: 40%;
             display: flex;
+            @media (max-width: $mobile-breakpoint) {
+                width: 99%;
+                margin: auto;
+                justify-content: center;
+            }            
             align-items: center;
             text-decoration: none;
 
         }
 
-        &__logo{
- 
+        &__logo{ 
             width: 120px;
             height: 120px;
             margin-right: 45px;
@@ -62,11 +69,17 @@
         width: 60%;
         display: flex;
         justify-content: space-around;
+        @media (max-width: $mobile-breakpoint) {
+            margin: auto;
+        }         
         align-items: center;
         a{
             font-weight: bold;
             color: #2c3e50;
             display: block;
+            @media (max-width: $mobile-breakpoint) {
+                margin-bottom: 20px;
+            }
 
             &:hover{
                 font-weight: bold;

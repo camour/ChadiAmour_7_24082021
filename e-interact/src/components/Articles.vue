@@ -79,6 +79,7 @@
 </script>
 
 <style lang="scss">
+    $mobile-breakpoint: 500px;
     @font-face{
         font-family: 'KG';
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
@@ -86,6 +87,10 @@
     .articles{
         width: 800px;
         margin: auto;
+        @media (max-width: $mobile-breakpoint){
+            width: 99%;
+            margin-top: 40px;    
+        }    
         position: relative; 
     }
     #newArticle{
@@ -109,6 +114,9 @@
     .newArticleBlock{
         width: 400px;
         margin: auto;
+        @media (max-width: $mobile-breakpoint){
+            width: 99%;
+        }       
         margin-bottom: 30px;
         display: flex;
         flex-direction: column;

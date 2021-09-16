@@ -136,12 +136,18 @@
 </script>
 
 <style lang="scss">
+    $mobile-breakpoint: 500px;
     @font-face{
         font-family: 'KG';
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
     }
     .articleBlock{
         position: relative;
+        @media (max-width: $mobile-breakpoint){
+            width: 99%;
+            margin: auto;
+            margin-bottom: 50px;       
+        }
         margin-bottom: 30px;        
         border: 2px rgb(229, 201, 201) solid; 
         box-shadow: 2px 2px 3px rgb(243, 122, 122);
@@ -159,10 +165,15 @@
         margin-bottom: 30px;
         display: flex;
         flex-wrap: wrap;
+        @media (max-width: $mobile-breakpoint){
+            flex-direction: column;
+        }
         padding: 0px;         
 
         &__post{          
-            width: 78%;
+            @media (min-width: $mobile-breakpoint){
+                width: 78%;
+            }            
             .articleSubject{
                 text-align: center;
                 width: 200px;
@@ -179,7 +190,9 @@
             .articleContent{
                 width: 80%;
                 margin: auto;
-                height: 80px;
+                @media (min-width: $mobile-breakpoint){
+                     height: 80px;
+                }
                 text-align: center;
                 padding: 10px;
                 border: 1px #bdb2b2 solid; 
@@ -190,8 +203,11 @@
             }
         }
         &__user{
-            width: 22%;
-            border-radius: 1rem 0 0 1rem;
+            border-radius: 1rem 1rem 0 0;
+            @media (min-width: $mobile-breakpoint){            
+                width: 22%;
+                border-radius: 1rem 0 0 1rem;
+            }
             box-shadow: 2px 2px 3px rgb(207, 106, 106);
             background: rgb(243, 239, 239);
             .userImage{
