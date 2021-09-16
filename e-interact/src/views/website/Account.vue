@@ -9,7 +9,7 @@
             </div>
             <div class="account__userImage" v-bind:style="{ backgroundImage: 'url('+user.image+')' }"></div>        
         </div>
-        <button type="submit" class="deleteAccount" @click="deleteAccount">Delete Account</button>
+        <button class="deleteAccount" @click="deleteAccount">Delete Account</button>
     </div>
 </template>
 

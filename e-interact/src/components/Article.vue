@@ -25,7 +25,8 @@
         <Comment v-for="(comment, commentIndex) in article.comments" :key="commentIndex" :comment="comment" :commentIndex="commentIndex" :articleIndex="articleIndex"/>
         <button id="newCommentButton" v-show="!showNewCommentTextArea" @click="enableNewCommentTextArea">+ new comment</button>
         <div class="newCommentBlock" v-show="showNewCommentTextArea">
-            <textarea class="newCommentContent" v-model="newCommentContent">comment...</textarea>
+            <label :for="'newComment' + article.articleId">new comment</label>
+            <textarea :id="'newComment' + article.articleId" class="newCommentContent" v-model="newCommentContent">comment...</textarea>
             <div class="newCommentButtonsBlock">   
                 <button @click="saveNewComment">save</button>
                 <button @click="cancelNewComment">cancel</button>
