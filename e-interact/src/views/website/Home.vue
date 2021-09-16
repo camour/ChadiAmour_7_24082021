@@ -45,7 +45,7 @@
 </script>
 
 <style lang="scss">
-  $mobile-breakpoint: 500px;
+  $mobile-breakpoint: 700px;
   .home{
     position: relative;
     &__user{

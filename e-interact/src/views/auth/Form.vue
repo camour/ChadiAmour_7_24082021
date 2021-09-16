@@ -129,13 +129,19 @@
     }
 </script>
 
-<style lang="scss">    
+<style lang="scss"> 
+    $mobile-breakpoint: 700px;    
     .form{
         width: 420px;
         margin: auto;
         margin-top: 40px;
         display: flex;
         flex-direction: column;
+        @media (max-width: $mobile-breakpoint) {
+            width: 99%;
+            margin: auto;
+            justify-content: center;
+        } 
    
         div{
             width: 80%;

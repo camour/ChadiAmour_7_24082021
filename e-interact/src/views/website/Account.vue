@@ -74,6 +74,7 @@
 </script>
 
 <style lang="scss">
+    $mobile-breakpoint: 700px;
     @font-face{
         font-family: 'KG';
         src: url('../../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
@@ -83,6 +84,10 @@
         margin: auto;
         display: flex;
         justify-content: space-around;
+        @media (max-width: $mobile-breakpoint){
+            flex-direction: column-reverse;
+            align-items: center;
+        }
         p{
             margin-bottom: 30px;
             text-align: left;
@@ -103,6 +108,9 @@
         background-position: center;
         background-size: cover;
         border-radius: 1em;
+        @media(max-width: $mobile-breakpoint){
+            margin-bottom: 20px;
+        }
     }
     .deleteAccount{
         width: 200px;

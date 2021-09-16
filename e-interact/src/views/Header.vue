@@ -27,13 +27,14 @@
 </script>
 
 <style lang="scss">
-    $mobile-breakpoint: 500px;    
+    $mobile-breakpoint: 700px;    
     .header{
         width: 600px;
         display: flex;
         @media (max-width: $mobile-breakpoint) {
             width: 99%;
-            flex-direction: column;;
+            flex-direction: column;
+            margin-bottom: 70px;
         }
         margin: auto;
         margin-top: 20px;
@@ -77,9 +78,6 @@
             font-weight: bold;
             color: #2c3e50;
             display: block;
-            @media (max-width: $mobile-breakpoint) {
-                margin-bottom: 20px;
-            }
 
             &:hover{
                 font-weight: bold;

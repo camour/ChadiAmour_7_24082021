@@ -63,7 +63,7 @@
 </script>
 
 <style lang="scss">
-    $mobile-breakpoint: 500px;
+    $mobile-breakpoint: 700px;
     @font-face{
         font-family: 'KG';
         src: url('../../public/polices/KGEverSinceNewYork.ttf') format('truetype');
