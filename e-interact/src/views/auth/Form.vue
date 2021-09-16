@@ -134,17 +134,17 @@
     .form{
         width: 420px;
         margin: auto;
-        margin-top: 50px;
         display: flex;
         flex-direction: column;
         @media (max-width: $mobile-breakpoint) {
             width: 99%;
-            margin: auto;
             justify-content: center;
         } 
+        margin-top: 50px;
+
    
         div{
-            width: 80%;
+            width: 300px;
             margin: auto;
             margin-top: 20px;
             display: flex;
