@@ -29,7 +29,7 @@
         background-size: cover;
     }
     h1{
-        width: 85%;
+        width: 190px;
         margin: auto;
         font-size: 0.8em;
     }
